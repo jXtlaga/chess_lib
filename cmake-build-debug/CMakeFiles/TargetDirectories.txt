@@ -1,0 +1,3 @@
+/Users/jantlaga/CLionProjects/chess_c_lib/cmake-build-debug/CMakeFiles/chess_c_lib.dir
+/Users/jantlaga/CLionProjects/chess_c_lib/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jantlaga/CLionProjects/chess_c_lib/cmake-build-debug/CMakeFiles/rebuild_cache.dir

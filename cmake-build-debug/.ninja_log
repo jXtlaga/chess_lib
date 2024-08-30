@@ -1,0 +1,21 @@
+# ninja log v5
+5	308	1724977331066316019	CMakeFiles/chess_c_lib.dir/src/bits_alghorithms.c.o	99c25c5c68861d7e
+1	355	1724944038194435262	CMakeFiles/chess_c_lib.dir/src/bits_alghoritms.c.o	46f8911bdd4056fa
+2	307	1724977331065305656	CMakeFiles/chess_c_lib.dir/src/board_visualisation.c.o	b5c8f5896e723cbb
+0	68	1724946322095415667	build.ninja	ca4c279056fcd37
+1	302	1724977400254702283	CMakeFiles/chess_c_lib.dir/src/moves_calculation.c.o	4b4a55bab2bccf7a
+3	309	1724977331069673188	CMakeFiles/chess_c_lib.dir/src/combinatorics_mask.c.o	71050a3350105392
+4	308	1724977331065397614	CMakeFiles/chess_c_lib.dir/src/moves_alg/bishop_attack.c.o	8b467dc09ed4f62b
+0	305	1724941643382775729	CMakeFiles/chess_c_lib.dir/src/moves_combinatorics.c.o	2f3f2126c0cf1b83
+0	302	1724977400254727866	CMakeFiles/chess_c_lib.dir/src/main.c.o	16c988e3f3c22e24
+302	479	1724977400431810363	chess_c_lib	52598f7f02d913e2
+307	332	1724977331092395504	CMakeFiles/chess_c_lib.dir/src/squares_alghorithms.c.o	7b498195c67132a8
+0	310	1724977429333880466	CMakeFiles/chess_c_lib.dir/src/main.c.o	16c988e3f3c22e24
+311	480	1724977429502494979	chess_c_lib	52598f7f02d913e2
+0	335	1724977459220559511	CMakeFiles/chess_c_lib.dir/src/main.c.o	16c988e3f3c22e24
+335	505	1724977459384330498	chess_c_lib	52598f7f02d913e2
+1	320	1724978150003074537	CMakeFiles/chess_c_lib.dir/src/combinatorics_mask.c.o	71050a3350105392
+1	321	1724978150001485615	CMakeFiles/chess_c_lib.dir/src/moves_alg/bishop_attack.c.o	8b467dc09ed4f62b
+1	265	1724978207233608087	CMakeFiles/chess_c_lib.dir/src/moves_alg/bishop_attack.c.o	8b467dc09ed4f62b
+0	265	1724978207233635712	CMakeFiles/chess_c_lib.dir/src/main.c.o	16c988e3f3c22e24
+1	266	1724978207233631254	CMakeFiles/chess_c_lib.dir/src/moves_calculation.c.o	4b4a55bab2bccf7a
