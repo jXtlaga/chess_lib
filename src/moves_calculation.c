@@ -39,6 +39,7 @@ U64 generate_rook_attack(U64 occ, int sq) {
     }
     return ans;
 }
+
 U64 generate_bishop_attack(U64 occ, int sq) {
     U64 sq1 = 1ULL << sq;
     U64 diag = DIAGONALS[get_distance_down(sq) - get_distance_right(sq) + 7];

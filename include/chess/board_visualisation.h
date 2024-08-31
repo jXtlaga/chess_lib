@@ -6,5 +6,5 @@
 #define CHESS_C_LIB_BOARD_VISUALISATION_H
 #include <stdio.h>
 #include "define_types.h"
-void printBinaryAsBoard(uint64_t n);
+void print_bitboard(uint64_t n);
 #endif //CHESS_C_LIB_BOARD_VISUALISATION_H

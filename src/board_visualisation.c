@@ -3,7 +3,7 @@
 //
 
 #include "../include/chess/board_visualisation.h"
-void printBinaryAsBoard(U64 n) {
+void print_bitboard(U64 n) {
     U64 i;
     unsigned int j = 0;
     for (i = (U64) 1 << (sizeof(U64) * 8 - 1); i > 0; i = i >> 1) {

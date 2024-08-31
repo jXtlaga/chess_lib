@@ -4,8 +4,8 @@
 
 #ifndef CHESS_C_LIB_BISHOP_ATTACK_H
 #define CHESS_C_LIB_BISHOP_ATTACK_H
-#include "define_types.h"
-#include "combinatorics_mask.h"
-void bishop_init();
+#include "../define_types.h"
+#include "../combinatorics_mask.h"
 U64 get_bishop_attack(U64 occ, int sq);
+void init_bishop();
 #endif //CHESS_C_LIB_BISHOP_ATTACK_H

@@ -4,6 +4,7 @@
 #include "../include/chess/combinatorics_mask.h"
 #include "../include/chess/bits_alghorithms.h"
 #include "../include/chess/squares_alghorithms.h"
+#include "../include/chess/board_visualisation.h"
 #include <stdio.h>
 int count_rook_line_mask(int distance){
     int count;
@@ -163,18 +164,7 @@ U64 get_mask_from_degree(int degree, U64 combination, U32 combination_bit_count,
  * [1 0 0 0 0 0 0 0]
  * [r 1 1 1 0 1 1 0]
  */
-U64 generate_rook_mask_combination2(int sq, U64 combination_sequence){
-    int distance_down = get_distance_down(sq);
-    int distance_right = get_distance_right(sq);
-    int distance_up = 7 - distance_down;
-    int distance_left = 7 - distance_right;
-
-    int distance_down_mask = distance_down == 0? distance_down : distance_down -1;
-    int distance_right_mask = distance_right == 0? distance_right : distance_right - 1;
-    int distance_up_mask = distance_up == 0? distance_up : distance_up - 1;
-    int distance_left_mask = distance_left == 0? distance_left : distance_left - 1;
-
-    int distance_direction_rook[] = {distance_right_mask, distance_up_mask, distance_left_mask, distance_down_mask};
+U64 generate_rook_mask_combination(U64 combination_sequence, int sq, int *distance_direction_rook){
     U64 combination_iteration = combination_sequence;
     U64 combination_mask = 0;
     for(int i = 0; i < 4; i++){
@@ -186,12 +176,9 @@ U64 generate_rook_mask_combination2(int sq, U64 combination_sequence){
     return combination_mask;
 }
 
-U64 generate_bishop_mask_combination(U64 combinations_sequence,int sq, int distance_right_up, int distance_up_left, int distance_left_down, int distance_down_right){
-
-    U64 combination_mask = 0;
-    int distance_direction_bishop[] = {distance_right_up, distance_up_left, distance_left_down, distance_down_right};
+U64 generate_bishop_mask_combination(U64 combinations_sequence,int sq, int *distance_direction_bishop){
     U64 combinations_iteration = combinations_sequence;
-
+    U64 combination_mask = 0;
     for(int i = 0; i < 4; i++){
         U64 one_side_combination = combinations_iteration & fill_bits(distance_direction_bishop[i]);
         combinations_iteration >>= distance_direction_bishop[i];
@@ -201,15 +188,39 @@ U64 generate_bishop_mask_combination(U64 combinations_sequence,int sq, int dista
     return combination_mask;
 }
 
+void get_distance_mask_rook(int sq, int *distance_array){
+    int distance_down = get_distance_down(sq);
+    int distance_right = get_distance_right(sq);
+    int distance_up = 7 - distance_down;
+    int distance_left = 7 - distance_right;
+
+    distance_array[0] = distance_right == 0? distance_right : distance_right - 1;
+    distance_array[1] = distance_up == 0? distance_up : distance_up - 1;
+    distance_array[2] = distance_left == 0? distance_left : distance_left - 1;
+    distance_array[3] = distance_down == 0? distance_down : distance_down -1;
+}
+void get_distance_mask_bishop(int sq, int *distance_array){
+    int distance_down = get_distance_down(sq);
+    int distance_right = get_distance_right(sq);
+    int distance_up = 7 - distance_down;
+    int distance_left = 7 - distance_right;
+
+    distance_array[0] = count_bishop_half_line_mask(distance_right,distance_up);
+    distance_array[1] = count_bishop_half_line_mask(distance_up, distance_left);
+    distance_array[2] = count_bishop_half_line_mask(distance_left, distance_down);
+    distance_array[3] = count_bishop_half_line_mask(distance_down, distance_right);
+}
+U64 generate_bishop_full_mask(int sq){
+    U64 combination_sequence = pow2_unsigned_32_exponent(count_bishop_full_mask(get_distance_right(sq), get_distance_down(sq)));
+    combination_sequence --;
+    int direction_bishop[4];
+    get_distance_mask_bishop(sq, direction_bishop);
+    return generate_bishop_mask_combination(combination_sequence, sq, direction_bishop);
+}
 U64 generate_rook_full_mask(int sq){
     U64 combination_sequence = pow2_unsigned_32_exponent(count_rook_full_mask(get_distance_right(sq), get_distance_down(sq)));
     combination_sequence --;
-    return generate_rook_mask_combination(sq, combination_sequence);
-}
-
-U64 generate_bishop_full_mask(int sq){
-
-    U64 combination_sequence = pow2_unsigned_32_exponent(count_bishop_full_mask(get_distance_right(sq), get_distance_down(sq)));
-    combination_sequence --;
-    return generate_bishop_mask_combination(sq, combination_sequence);
+    int direction_rook[4];
+    get_distance_mask_rook(sq, direction_rook);
+    return generate_rook_mask_combination(combination_sequence, sq, direction_rook);
 }

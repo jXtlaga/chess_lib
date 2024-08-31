@@ -1,11 +1,10 @@
 //
 // Created by Jan Tlaga on 27/08/2024.
 //
-#include "../../include/chess/bishop_attack.h"
+#include "../../include/chess/moves/bishop_attack.h"
 #include "../../include/chess/bits_alghorithms.h"
 #include <assert.h>
-#include "math.h"
-#include "../../include/chess/squares_alghorithms.h"
+#include "../../include/chess/moves_calculation.h"
 
 U64 bishop_hash_[64][512] = {0};
 
@@ -47,45 +46,29 @@ U64 get_bishop_attack(U64 occ, int sq){
     U64 attacks = bishop_hash_[sq][index];
     return attacks;
 }
-//int bishopMagicSqInit(int sq, dirCombination dirComb[4]){
-//    int distance_right = get_distance_right(sq);
-//    int distance_down = get_distance_down(sq);
-//    U32 possible_combination = pow2_unsigned_32_exponent(BISHOP_MASK_BITS_COUNT[sq]);
-//    for(int i = 0; i < possible_combination; i++){
-//        generate_bishop_mask_combination(sq, i, dirComb);
-//    }
-//    U64 *magicNumbers =  bishopMagicNumbers[sq];
-//    uint8_t iteRight = 0;
-//    uint64_t downPosition = nextCombination(dirComb[3], iteDown);
-//    iteDown++;
-//    //creating key from (mask & sum position) * magic_number >> 64 - count of bits in mask
-//    U64 position = rightPosition|leftPosition|upPosition|downPosition;
-//    unsigned int index = (bishopMask[sq] & position) * BMagic[sq] >> (64 - BishopBits[sq]);
-//    assert(index < 4096 && "error- bigger index");
-//    assert(magicNumbers[index] == 0 && "error- repeated index");
-//    U64 board = 1;
-//    board <<= sq;
-//    *(magicNumbers + index) = bishopShiftMoves(board, 0, position);
-//    return 1;
-//}
-//void bishopInit(){
-//    for(int i = 0; i < 64; i++){
-//        int dirBitsUp = 6- i / 8;
-//        int dirBitsDown = i / 8 - 1;
-//        int dirBitsLeft = 6- i % 8;
-//        int dirBitsRight = (i % 8) - 1;
-//
-//        int dirBits45 = dirBitsRight < dirBitsUp ? dirBitsRight : dirBitsUp;
-//        int dirBits225= dirBitsLeft < dirBitsDown ? dirBitsLeft  : dirBitsDown;
-//        int dirBits135 = dirBitsUp < dirBitsLeft ? dirBitsUp : dirBitsLeft;
-//        int dirBits315 = dirBitsDown < dirBitsRight ? dirBitsDown : dirBitsRight;
-//
-//        dirCombination dirComb[] = {{dirBits45, pow(2, dirBits45), i - dirBits45 + 8, 45},
-//                                    {dirBits225, pow(2, dirBits225), i - (dirBits225)*7 + 1 - dirBits225, 45},
-//                                    {dirBits135, pow(2, dirBits135),  i + 1 + dirBits135, 135},
-//                                    {dirBits315, pow(2, dirBits315),  i - 9*dirBits315 - 8 + dirBits315, 135}
-//        };
-//        int initSq = bishopMagicSqInit(i, dirComb);
-//        assert(initSq == 1 && "error- bishopInit");
-//    }
-//}
+
+void init_sq_bishop(int sq){
+    U64 *magic_ = bishop_hash_[sq];
+
+    int distance_bishop[4];
+    get_distance_mask_bishop(sq, distance_bishop);
+
+    U32 possible_combination = pow2_unsigned_32_exponent(BISHOP_MASK_BITS_COUNT[sq]);
+
+    U64 bishop_mask = BISHOP_MASK[sq];
+    U64 magic_hash = BISHOP_MAGIC[sq];
+    U64 bishop_bits_count = BISHOP_MASK_BITS_COUNT[sq];
+    for(int combination_sequence = 0; combination_sequence < possible_combination; combination_sequence++){
+        U64 sequence_mask = generate_bishop_mask_combination(combination_sequence, sq, distance_bishop);
+        U64 *magic_numbers = bishop_hash_[sq];
+        U32 index = (sequence_mask & bishop_mask) * magic_hash >> (64 - bishop_bits_count);
+        assert(index < 4096 && "error- bigger index");
+        assert(magic_numbers[index] == 0 && "error- repeated index");
+        *(magic_ + index) = generate_bishop_attack(sequence_mask, sq);
+    }
+}
+void init_bishop(){
+    for(int sq = 0; sq < 64; sq++){
+        init_sq_bishop(sq);
+    }
+}

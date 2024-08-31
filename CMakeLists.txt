@@ -11,4 +11,8 @@ add_executable(chess_c_lib
         src/bits_alghorithms.c
         src/moves_calculation.c
         src/squares_alghorithms.c
+        src/moves_alg/rook_attack.c
+        src/moves_alg/knight_attack.c
+        src/moves_alg/king_attack.c
+        src/moves_alg/pawn_attack.c
 )
