@@ -1,7 +1,7 @@
 //
 // Created by Jan Tlaga on 29/08/2024.
 //
-#include "../include/chess/squares_alghorithms.h"
+#include "../../include/chess/squares_alghorithms.h"
 int get_distance_right(int sq){
     return sq % 8;
 }

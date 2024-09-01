@@ -32,14 +32,28 @@ U64 knight_moves(int sq, U64 current_color_occ){
 U64 king_moves(int sq, U64 current_color_occ){
     return get_king_attack(sq) & ~current_color_occ;
 }
-U64 black_pawn_moves(int sq, U64 current_color_occ){
-    return get_black_pawn_attack(sq) & ~current_color_occ;
-}
-U64 white_pawn_moves(int sq, U64 current_color_occ){
-    return get_white_pawn_attack(sq) & ~current_color_occ;
+
+U64 white_pawn_moves_start(int sq, U64 all_occ, U64 current_color_occ, U64 enemy_color_occ){
+    U64 move = get_rook_attack(all_occ, sq) & get_white_pawn_move(sq);
+    U64 attack = get_white_pawn_attack(sq) & enemy_color_occ;
+    return move | attack;
 }
 
-
+U64 black_pawn_moves_start(int sq, U64 all_occ, U64 current_color_occ, U64 enemy_color_occ){
+    U64 move = get_rook_attack( all_occ, sq) & get_black_pawn_move(sq);
+    U64 attack = get_black_pawn_attack(sq) & enemy_color_occ;
+    return move | attack;
+}
+U64 white_pawn_moves(int sq, U64 all_occ, U64 current_color_occ){
+    U64 move = get_white_pawn_attack(sq) & ~current_color_occ;
+    U64 attack = get_white_pawn_attack(sq) & ~current_color_occ;
+    return move | attack;
+}
+U64 black_pawn_moves(int sq, U64 all_occ, U64 current_color_occ){
+    U64 move = get_black_pawn_attack(sq) & ~current_color_occ;
+    U64 attack = get_black_pawn_attack(sq) & ~current_color_occ;
+    return move | attack;
+}
 void init_moves(){
     init_rook();
     init_bishop();

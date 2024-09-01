@@ -1,10 +1,10 @@
 //
 // Created by Jan Tlaga on 27/08/2024.
 //
-#include "../include/chess/combinatorics_mask.h"
-#include "../include/chess/bits_alghorithms.h"
-#include "../include/chess/squares_alghorithms.h"
-#include "../include/chess/board_visualisation.h"
+#include "../../include/chess/combinatorics_mask.h"
+#include "../../include/chess/bits_alghorithms.h"
+#include "../../include/chess/squares_alghorithms.h"
+#include "../../include/chess/board_visualisation.h"
 #include <stdio.h>
 int count_rook_line_mask(int distance){
     int count;

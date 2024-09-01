@@ -5,12 +5,12 @@
 #include "../include/chess/define_types.h"
 #include <math.h>
 #include "../include/chess/bits_alghorithms.h"
-#include "../include/chess/combinatorics_mask.h"
-#include "../include/chess/moves_calculation.h"
-#include "../include/chess/squares_alghorithms.h"
-#include "../include/chess/moves/bishop_attack.h"
-#include "../include/chess/moves/rook_attack.h"
+#include "../include/chess/moves/moves_pieces.h"
+#include "../include/chess/moves_position.h"
+#include "../include/chess/console_visualization.h"
+#include "../include/chess/console_chess.h"
 #include "../include/chess/moves/pawn_attack.h"
+
 U64 generate_magic(U64 mask_full, int size){
     U64 mask = mask_full;
     U64 gen_magic = 0;
@@ -27,10 +27,11 @@ U64 generate_magic(U64 mask_full, int size){
 
 int main() {
     init_pawn();
-    int sq = 13;
-    U64 black_pawn_att = get_white_pawn_attack(sq);
-    print_bitboard(black_pawn_att);
-    black_pawn_att |= get_white_pawn_move(sq);
-    print_bitboard(black_pawn_att);
+    U64 test = white_pawn_moves_start(8, 0, 0, 0);
+
+    print_bitboard(test);
+
+    print_bitboard(get_white_pawn_move(8));
+    start_program();
     return 0;
 }

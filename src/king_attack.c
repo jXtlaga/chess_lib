@@ -2,7 +2,7 @@
 // Created by Jan Tlaga on 31/08/2024.
 //
 
-#include "../../include/chess/moves/king_attack.h"
+#include "../include/chess/moves/king_attack.h"
 
 U64 king_lookup_[64];
 
