@@ -22,23 +22,37 @@ void print_board(char *board) {
     }
     printf("\n");
 }
-void print_position(Position position, U64 attack){
+void print_position(Position *position, U64 attack){
     char board[64];
     for (int i = 0; i < 64; i++) {
         board[i] = '.';
     }
-    bitboard_to_array(position.white_pawns, 'P', board);
-    bitboard_to_array(position.white_rooks, 'R', board);
-    bitboard_to_array(position.white_knights, 'N', board);
-    bitboard_to_array(position.white_bishops, 'B', board);
-    bitboard_to_array(position.white_queens, 'Q', board);
-    bitboard_to_array(position.white_king, 'K', board);
-    bitboard_to_array(position.black_pawns, 'p', board);
-    bitboard_to_array(position.black_rooks, 'r', board);
-    bitboard_to_array(position.black_knights, 'n', board);
-    bitboard_to_array(position.black_bishops, 'b', board);
-    bitboard_to_array(position.black_queens, 'q', board);
-    bitboard_to_array(position.black_king, 'k', board);
+    char white_pieces_symbols[] = {'P', 'R', 'N', 'B', 'Q', 'K'};
+    char black_pieces_symbols[] = {'p', 'r', 'n', 'b', 'q', 'k'};
+    U64 *white_pieces[] = {
+            &position->white_pieces.pawn,
+            &position->white_pieces.rook,
+            &position->white_pieces.knight,
+            &position->white_pieces.bishop,
+            &position->white_pieces.queen,
+            &position->white_pieces.king
+    };
+    U64 *black_pieces[] = {
+            &position->black_pieces.pawn,
+            &position->black_pieces.rook,
+            &position->black_pieces.knight,
+            &position->black_pieces.bishop,
+            &position->black_pieces.queen,
+            &position->black_pieces.king
+    };
+
+    for (int i = 0; i < 6; i++) {
+        bitboard_to_array(*white_pieces[i], white_pieces_symbols[i], board);
+    }
+
+    for (int i = 0; i < 6; i++) {
+        bitboard_to_array(*black_pieces[i], black_pieces_symbols[i], board);
+    }
 
     bitboard_to_array(attack, 'X', board);
     print_board(board);

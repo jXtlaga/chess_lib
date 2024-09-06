@@ -24,82 +24,60 @@ int str_to_sq(char* str){
     int rank = str[1] - '1';
     return rank * 8 + file;
 }
-typedef enum COLOR{
-    WHITE,
-    BLACK
-} COLOR;
+
 U64 get_white_occ(Position position){
-    return position.white_pawns | position.white_rooks | position.white_knights | position.white_bishops | position.white_queens | position.white_king;
+    return position.white_pieces.pawn | position.white_pieces.rook | position.white_pieces.knight | position.white_pieces.bishop | position.white_pieces.queen | position.white_pieces.king;
 }
 U64 get_black_occ(Position position){
-    return position.black_pawns | position.black_rooks | position.black_knights | position.black_bishops | position.black_queens | position.black_king;
+    return position.black_pieces.pawn | position.black_pieces.rook | position.black_pieces.knight | position.black_pieces.bishop | position.black_pieces.queen | position.black_pieces.king;
 }
-typedef struct Move{
+typedef struct Move_console{
     U64 *move_start;
     U64 move_possibilities;
-} Move;
-Move get_moves(Position *position, int sq, COLOR color, U64 current_color_occ, U64 enemy_color_occ, U64 all_occ){
+} Move_console;
+Move_console get_moves_console(Position *position, int sq, COLOR color, U64 current_color_occ, U64 enemy_color_occ, U64 all_occ) {
     U64 sq1 = 1ULL << sq;
-    if(color == WHITE && (current_color_occ & sq1) != 0) {
-        if (position->white_pawns & sq1) {
-            if (sq >= 8 && sq < 16) {
-                return (Move) {&position->white_pawns, white_pawn_moves_start(sq, all_occ, current_color_occ, enemy_color_occ)};
-            };
-            return (Move) {&position->white_pawns, white_pawn_moves(sq, all_occ, current_color_occ)};
+
+    Pieces_position *pieces = (color == WHITE) ? &position->white_pieces : &position->black_pieces;
+
+    if((current_color_occ & sq1) != 0) {
+        if (pieces->pawn & sq1) {
+            if ((color == WHITE && sq >= 8 && sq < 16) || (color == BLACK && sq >= 48 && sq < 56)) {
+                return (Move_console) {&pieces->pawn, color == WHITE ? white_pawn_moves_start(sq, all_occ, current_color_occ, enemy_color_occ) : black_pawn_moves_start(sq, all_occ, current_color_occ, enemy_color_occ)};
+            }
+            return (Move_console) {&pieces->pawn, color == WHITE ? white_pawn_moves(sq, all_occ, current_color_occ) : black_pawn_moves(sq, all_occ, current_color_occ)};
         }
-        if (position->white_rooks & sq1) {
-            return (Move) {&position->white_rooks, rook_moves(sq, all_occ, current_color_occ)};
+        if (pieces->rook & sq1) {
+            return (Move_console) {&pieces->rook, rook_moves(sq, all_occ, current_color_occ)};
         }
-        if (position->white_knights & sq1) {
-            return (Move) {&position->white_knights, knight_moves(sq, current_color_occ)};
+        if (pieces->knight & sq1) {
+            return (Move_console) {&pieces->knight, knight_moves(sq, current_color_occ)};
         }
-        if (position->white_bishops & sq1) {
-            return (Move) {&position->white_bishops, bishop_moves(sq, all_occ, current_color_occ)};
+        if (pieces->bishop & sq1) {
+            return (Move_console) {&pieces->bishop, bishop_moves(sq, all_occ, current_color_occ)};
         }
-        if (position->white_queens & sq1) {
-            return (Move) {&position->white_queens, queen_moves(sq, all_occ, current_color_occ)};
+        if (pieces->queen & sq1) {
+            return (Move_console) {&pieces->queen, queen_moves(sq, all_occ, current_color_occ)};
         }
-        if (position->white_king & sq1) {
-            return (Move) {&position->white_king, king_moves(sq, current_color_occ)};
-        }
-    }
-    if(color == BLACK && (current_color_occ & sq1) != 0) {
-        if (position->black_pawns & sq1) {
-            if (sq >= 48 && sq < 56) {
-                return (Move) {&position->black_pawns, black_pawn_moves_start(sq, all_occ, current_color_occ, enemy_color_occ)};
-            };
-            return (Move) {&position->black_pawns, black_pawn_moves(sq, all_occ, current_color_occ)};
-        }
-        if (position->black_rooks & sq1) {
-            return (Move) {&position->black_rooks, rook_moves(sq, all_occ, current_color_occ)};
-        }
-        if (position->black_knights & sq1) {
-            return (Move) {&position->black_knights, knight_moves(sq, current_color_occ)};
-        }
-        if (position->black_bishops & sq1) {
-            return (Move) {&position->black_bishops, bishop_moves(sq, all_occ, current_color_occ)};
-        }
-        if (position->black_queens & sq1) {
-            return (Move) {&position->black_queens, queen_moves(sq, all_occ, current_color_occ)};
-        }
-        if (position->black_king & sq1) {
-            return (Move) {&position->black_king, king_moves(sq, current_color_occ)};
+        if (pieces->king & sq1) {
+            return (Move_console) {&pieces->king, king_moves(sq, current_color_occ)};
         }
     }
 
-    return (Move) {&position->white_pawns, ERROR_64};
+    return (Move_console) {&position->white_pieces.pawn, ERROR_64};
 }
+
 
 void start_program(){
     init_moves();
     char input[255];
-    Position main_position = create_start_position();
-    print_position(main_position, 0);
+    Position position = create_start_position();
+    print_position(&position, 0);
     int selected_sq = -1;
-    Move move_start_pos = {0, 0};
+    Move_console move_start_pos = {0, 0};
     while(1){
-        U64 current_color_occ = main_position.moveNumber & 1U? get_black_occ(main_position) : get_white_occ(main_position);
-        U64 enemy_color_occ = main_position.moveNumber & 1U? get_white_occ(main_position) : get_black_occ(main_position);
+        U64 current_color_occ = position.move_number & 1U? get_black_occ(position) : get_white_occ(position);
+        U64 enemy_color_occ = position.move_number & 1U? get_white_occ(position) : get_black_occ(position);
         U64 all_occ = current_color_occ | enemy_color_occ;
         
         printf("Enter move: ");
@@ -111,21 +89,23 @@ void start_program(){
             printf("Sq: %d\n", sq);
             if (selected_sq == -1){
                 selected_sq = sq;
-                Move move_options = get_moves(&main_position, sq, main_position.moveNumber & 1ULL? BLACK : WHITE, current_color_occ, enemy_color_occ, all_occ);
+                Move_console move_options = get_moves_console(&position, sq,
+                                                              position.move_number & 1ULL ? BLACK : WHITE,
+                                                              current_color_occ, enemy_color_occ, all_occ);
                 if (move_options.move_possibilities == ERROR_64){
                     selected_sq = -1;
                     continue;
                 }else {
                     move_start_pos = move_options;
                 }
-                print_position(main_position, move_start_pos.move_possibilities);
+                print_position(&position, move_start_pos.move_possibilities);
             }
             else if(move_start_pos.move_possibilities & (1ULL << sq)){
                 *move_start_pos.move_start &= ~(1ULL << selected_sq);
                 *move_start_pos.move_start |= (1ULL << sq);
-                print_position(main_position, 0);
+                print_position(&position, 0);
                 selected_sq = -1;
-                main_position.moveNumber ++;
+                position.move_number ++;
             }
         }
 

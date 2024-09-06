@@ -1,0 +1,8 @@
+//
+// Created by Jan Tlaga on 04/09/2024.
+//
+
+#ifndef CHESS_C_LIB_CONVERTER_POSITION_H
+#define CHESS_C_LIB_CONVERTER_POSITION_H
+
+#endif //CHESS_C_LIB_CONVERTER_POSITION_H

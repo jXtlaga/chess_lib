@@ -42,7 +42,7 @@ U64 generate_rook_attack(U64 occ, int sq) {
 
 U64 generate_bishop_attack(U64 occ, int sq) {
     U64 sq1 = 1ULL << sq;
-    U64 diag = DIAGONALS[get_distance_down(sq) - get_distance_right(sq) + 7];
+    U64 diag = DIAGONAL_DOWN_LEFT_TO_UP_RIGHT[get_distance_down(sq) - get_distance_right(sq) + 7];
     U64 fill_up_sq = fill_bits_up(sq1);
     U64 ans = 0;
 
@@ -52,7 +52,7 @@ U64 generate_bishop_attack(U64 occ, int sq) {
         occ = rotate_board_90_clockwise(occ);
         sq1 = rotate_board_90_clockwise(sq1);
         sq = get_one_bit_index(sq1);
-        diag = DIAGONALS[get_distance_down(sq) - get_distance_right(sq) + 7];
+        diag = DIAGONAL_DOWN_LEFT_TO_UP_RIGHT[get_distance_down(sq) - get_distance_right(sq) + 7];
         fill_up_sq = fill_bits_up(sq1);
         ans = rotate_board_90_clockwise(ans);
     }
