@@ -58,6 +58,9 @@ void print_type_move(TYPE_MOVE type){
         case KING_MOVE:
             printf("KING_MOVE\n");
             break;
+        case PAWN_MOVE_START:
+            printf("PAWN_MOVE_START\n");
+            break;
         case PAWN_MOVE:
             printf("PAWN_MOVE\n");
             break;
