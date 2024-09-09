@@ -64,18 +64,25 @@ void print_type_move(TYPE_MOVE type){
         case PAWN_MOVE:
             printf("PAWN_MOVE\n");
             break;
-        case CASTLING_SHORT:
+        case CASTLING:
             printf("CASTLING_SHORT\n");
-            break;
-        case CASTLING_LONG:
-            printf("CASTLING_LONG\n");
             break;
         case EN_PASSANT:
             printf("EN_PASSANT\n");
             break;
-        case PROMOTION:
-            printf("PROMOTION\n");
+        case PROMOTION_QUEEN:
+            printf("PROMOTION QUEEN\n");
             break;
+        case PROMOTION_ROOK:
+            printf("PROMOTION ROOK\n");
+            break;
+        case PROMOTION_BISHOP:
+            printf("PROMOTION BISHOP\n");
+            break;
+        case PROMOTION_KNIGHT:
+            printf("PROMOTION KNIGHT\n");
+            break;
+
     }
 }
 

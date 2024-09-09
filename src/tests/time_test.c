@@ -69,9 +69,7 @@ int count_bishop(int sq) {
 int count_bishop2(int sq, int *arr_mask){
     return arr_mask[sq];
 }
-int count_bishop3(int sq){
-    return bishop_mask[sq];
-}
+
 
 
 

@@ -2,10 +2,10 @@
 // Created by Jan Tlaga on 29/08/2024.
 //
 
-#include "../../include/chess/moves_calculation.h"
+#include "../../include/chess/moves_alg/moves_calculation.h"
 #include "../../include/chess/combinatorics_mask.h"
-#include "../../include/chess/squares_alghorithms.h"
-#include "../../include/chess/bits_alghorithms.h"
+#include "../../include/chess/algorithms/squares_alghorithms.h"
+#include "../../include/chess/algorithms/bits_alghorithms.h"
 #include "../../include/chess/board_visualisation.h"
 U64 generate_attack_left(U64 checking_side_mask, U64 occ, U64 fill_up_sq){
     U64 ans = 0;

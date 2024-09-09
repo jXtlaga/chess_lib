@@ -5,8 +5,8 @@
 #include "../../include/chess/console_chess.h"
 #include "../../include/chess/define_types.h"
 #include "../../include/chess/console_visualization.h"
-#include "../../include/chess/moves_position.h"
-#include "../../include/chess/moves/moves_pieces.h"
+#include "../../include/chess/moves_alg/moves_position.h"
+#include "../../include/chess/moves_alg/moves_pieces.h"
 #include <string.h>
 #include <assert.h>
 #define ERROR_64 0xFFFFFFFFFFFFFFFF

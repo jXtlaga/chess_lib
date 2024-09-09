@@ -2,9 +2,9 @@
 // Created by Jan Tlaga on 27/08/2024.
 //
 #include "../../include/chess/moves/bishop_attack.h"
-#include "../../include/chess/bits_alghorithms.h"
+#include "../../include/chess/algorithms/bits_alghorithms.h"
 #include <assert.h>
-#include "../../include/chess/moves_calculation.h"
+#include "../../include/chess/moves_alg/moves_calculation.h"
 
 U64 bishop_hash_[64][512] = {0};
 

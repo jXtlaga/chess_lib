@@ -4,8 +4,8 @@
 
 #include "../../include/chess/moves/rook_attack.h"
 #include "../../include/chess/combinatorics_mask.h"
-#include "../../include/chess/moves_calculation.h"
-#include "../../include/chess/bits_alghorithms.h"
+#include "../../include/chess/moves_alg/moves_calculation.h"
+#include "../../include/chess/algorithms/bits_alghorithms.h"
 #include <assert.h>
 U64 rook_hash_[64][4096] = {0};
 const U64 ROOK_MASK[] = {0x101010101017e, 0x202020202027c, 0x404040404047a, 0x8080808080876, 0x1010101010106e, 0x2020202020205e, 0x4040404040403e, 0x8080808080807e,

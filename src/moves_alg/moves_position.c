@@ -2,7 +2,7 @@
 // Created by Jan Tlaga on 31/08/2024.
 //
 
-#include "../../include/chess/moves_position.h"
+#include "../../include/chess/moves_alg/moves_position.h"
 Position create_start_position(){
     Position pos;
     pos.white_pieces.pawn = 0x000000000000FF00;
@@ -22,7 +22,7 @@ Position create_start_position(){
     pos.move_number = 0;
     pos.half_move_clock = 0;
 
-    pos.en_passant_white = 0;
-    pos.en_passant_black = 0;
+    pos.en_passant_white_sq = 0;
+    pos.en_passant_black_sq = 0;
     return pos;
 }

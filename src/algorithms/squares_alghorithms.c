@@ -1,7 +1,7 @@
 //
 // Created by Jan Tlaga on 29/08/2024.
 //
-#include "../../include/chess/squares_alghorithms.h"
+#include "../../include/chess/algorithms/squares_alghorithms.h"
 int get_distance_right(int sq){
     return sq % 8;
 }
@@ -37,4 +37,8 @@ U64 flip_board_vertical(U64 x){
 
 U64 rotate_board_90_clockwise(U64 x){
     return flip_board_vertical(flip_board_diag_A8_H1(x));
+}
+
+U64 get_occ(Pieces_position *position) {
+    return position->rook | position->bishop | position->queen | position->knight | position->pawn | position->king;
 }

@@ -1,0 +1,8 @@
+//
+// Created by Jan Tlaga on 9/8/24.
+//
+
+#ifndef CHESS_C_LIB_CASTLING_VALIDATION_H
+#define CHESS_C_LIB_CASTLING_VALIDATION_H
+
+#endif //CHESS_C_LIB_CASTLING_VALIDATION_H

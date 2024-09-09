@@ -2,8 +2,8 @@
 // Created by Jan Tlaga on 05/09/2024.
 //
 
-#include "../../include/chess/attack_mask.h"
-#include "../../include/chess/bits_alghorithms.h"
+#include "../../include/chess/mask_alg/attack_mask.h"
+#include "../../include/chess/algorithms/bits_alghorithms.h"
 #include "../../include/chess/moves/rook_attack.h"
 #include "../../include/chess/moves/bishop_attack.h"
 #include "../../include/chess/moves/knight_attack.h"

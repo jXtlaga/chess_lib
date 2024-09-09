@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include "../../include/chess/console_visualization.h"
-#include "../../include/chess/bits_alghorithms.h"
+#include "../../include/chess/algorithms/bits_alghorithms.h"
 void bitboard_to_array(U64 bitboard, char piece, char *array) {
     while (bitboard) {
         U64 LSB = get_LS1B(bitboard);

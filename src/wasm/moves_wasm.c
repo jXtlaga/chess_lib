@@ -7,7 +7,7 @@
 #include "../../include/chess/moves/knight_attack.h"
 #include "../../include/chess/moves/pawn_attack.h"
 #include "../../include/chess/moves/king_attack.h"
-#include "../../include/chess/moves/moves_pieces.h"
+#include "../../include/chess/moves_alg/moves_pieces.h"
 
 U64 combineU32(U32 low, U32 high){
     return ((U64) high << 32) | low;
