@@ -160,14 +160,14 @@ void position_analysis(Position *position, Move *moves, int *ite_moves) {
     U64 position_pawn_start = pos_info.side == WHITE ? ROW2 & pos_info.current_pieces_position.pawn : ROW7 &
                                                                                                       pos_info.current_pieces_position.pawn;
     U64 position_pawn_after_start = pos_info.current_pieces_position.pawn ^ position_pawn_start;
-    U64 position_occ_pieces[7] = {pos_info.current_pieces_position.rook, pos_info.current_pieces_position.knight,
+    U64 position_occ_pieces[7] = {position_pawn_start, position_pawn_after_start, pos_info.current_pieces_position.rook, pos_info.current_pieces_position.knight,
                                   pos_info.current_pieces_position.bishop, pos_info.current_pieces_position.queen,
-                                  pos_info.current_pieces_position.king, position_pawn_start,
-                                  position_pawn_after_start};
-    get_moves_func moves_struct[7] = {rook_moves_struct, knight_moves_struct, bishop_moves_struct, queen_moves_struct,
-                                      king_moves_struct, pos_info.side == WHITE ? white_pawn_moves_start_struct
-                                                                                : black_pawn_moves_start_struct,
-                                      pos_info.side == WHITE ? white_pawn_moves_struct : black_pawn_moves_struct};
+                                  pos_info.current_pieces_position.king};
+    get_moves_func moves_struct[7] = {pos_info.side == WHITE ? white_pawn_moves_start_struct
+                                                             : black_pawn_moves_start_struct,
+                                      pos_info.side == WHITE ? white_pawn_moves_struct : black_pawn_moves_struct, rook_moves_struct, knight_moves_struct, bishop_moves_struct, queen_moves_struct,
+                                      king_moves_struct};
+
 
     //1. moves analysis depends on double check, check and without check
     //1.1 double check
