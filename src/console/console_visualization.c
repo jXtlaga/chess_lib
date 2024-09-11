@@ -57,3 +57,54 @@ void print_position(Position *position, U64 attack){
     bitboard_to_array(attack, 'X', board);
     print_board(board);
 }
+void print_positions(Position *positions, U64 *attacks, int num_positions) {
+    char boards[num_positions][64];
+    char white_pieces_symbols[] = {'P', 'R', 'N', 'B', 'Q', 'K'};
+    char black_pieces_symbols[] = {'p', 'r', 'n', 'b', 'q', 'k'};
+
+    // Initialize boards
+    for (int n = 0; n < num_positions; n++) {
+        for (int i = 0; i < 64; i++) {
+            boards[n][i] = '.';
+        }
+    }
+
+    // Populate boards with pieces
+    for (int n = 0; n < num_positions; n++) {
+        U64 *white_pieces[] = {
+                &positions[n].white_pieces.pawn,
+                &positions[n].white_pieces.rook,
+                &positions[n].white_pieces.knight,
+                &positions[n].white_pieces.bishop,
+                &positions[n].white_pieces.queen,
+                &positions[n].white_pieces.king
+        };
+        U64 *black_pieces[] = {
+                &positions[n].black_pieces.pawn,
+                &positions[n].black_pieces.rook,
+                &positions[n].black_pieces.knight,
+                &positions[n].black_pieces.bishop,
+                &positions[n].black_pieces.queen,
+                &positions[n].black_pieces.king
+        };
+
+        for (int i = 0; i < 6; i++) {
+            bitboard_to_array(*white_pieces[i], white_pieces_symbols[i], boards[n]);
+            bitboard_to_array(*black_pieces[i], black_pieces_symbols[i], boards[n]);
+        }
+
+        bitboard_to_array(attacks[n], 'X', boards[n]);
+    }
+
+    // Print boards side by side
+    for (int row = 7; row >= 0; row--) {
+        for (int n = 0; n < num_positions; n++) {
+            for (int col = 7; col >= 0; col--) {
+                printf("%c ", boards[n][row * 8 + col]);
+            }
+            printf("   "); // Space between boards
+        }
+        printf("\n");
+    }
+    printf("\n");
+}

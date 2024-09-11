@@ -11,7 +11,6 @@
 #include "../../include/chess/board_visualisation.h"
 void promote_pawn(U64 *pawn, U64 *promoted_piece, U64 from_sq, U64 to_sq) {
     *pawn ^= from_sq;
-    print_bitboard(from_sq);
     *promoted_piece |= to_sq;
 }
 void play_castling(U64 *king_sq1, U64 *rook_sq1, COLOR side, bool is_short_castling) {
@@ -48,7 +47,7 @@ void remove_enemy_piece(U64 remove_occ, Pieces_position *enemy_pieces) {
 }
 
 void move_and_remove_piece(U64 *current_piece_occ, Pieces_position *enemy_pieces, U64 from_sq1, U64 to) {
-    assert((from_sq1 & *current_piece_occ) != 0);
+    assert((from_sq1 & *current_piece_occ) != 0 );
     *current_piece_occ ^= from_sq1;
     *current_piece_occ |= to;
     remove_enemy_piece(to, enemy_pieces);

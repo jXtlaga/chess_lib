@@ -15,12 +15,13 @@
 #include "../../include/chess/algorithms/bits_alghorithms.h"
 #include "../../include/chess/moves/bishop_attack.h"
 #include "../../include/chess/algorithms/squares_alghorithms.h"
-
+#include "../../include/chess/board_visualisation.h"
 U64 get_check_rook(int king_sq, U64 all_occ, U64 enemy_rook_queen_occ){
     U64 mask = get_rook_attack(all_occ, king_sq);
     U64 attackers = mask & enemy_rook_queen_occ;
     if ((mask & enemy_rook_queen_occ) != 0){
         U64 attackers_mask = get_rook_attack(all_occ, get_one_bit_index(get_LS1B(attackers)));
+
         mask &= attackers_mask;
         mask |= attackers;
         return mask;

@@ -16,7 +16,7 @@ void add_move(Move *piece_move, int *ite_moves, int from, U64 to, TYPE_MOVE type
 }
 
 void get_move_pin_check(U64 piece_occ, U64 all_occ, U64 current_occ, U64 pin_mask, U64 (*get_moves)(Board_move_info),
-                        Move *piece_move, int *ite_moves, TYPE_PIECE type) {
+                        Move *piece_move, int *ite_moves, TYPE_MOVE type) {
     while (piece_occ != 0) {
         U64 LS1B = get_LS1B(piece_occ);
         int sq = get_one_bit_index(LS1B);
@@ -35,7 +35,7 @@ void get_move_pin_check(U64 piece_occ, U64 all_occ, U64 current_occ, U64 pin_mas
 }
 
 void get_one_move(U64 piece_occ, U64 all_occ, U64 current_occ, U64 (*get_moves)(Board_move_info), Move *piece_move,
-                  int *ite_moves, TYPE_PIECE type) {
+                  int *ite_moves, TYPE_MOVE type) {
     while (piece_occ != 0) {
         U64 LS1B = get_LS1B(piece_occ);
         int sq = get_one_bit_index(LS1B);
@@ -79,8 +79,8 @@ Position_main_data init_main_data(Position *position, U64 *pin_mask) {
     U64 king_sq1 = get_LS1B(current_pieces_position.king);
     int king_sq = get_one_bit_index(king_sq1);
 
-    U64 check_rook = get_check_rook(king_sq, current_occ, enemy_rook_queen_occ);
-    U64 check_bishop = get_check_bishop(king_sq, current_occ, enemy_bishop_queen_occ);
+    U64 check_rook = get_check_rook(king_sq, all_occ, enemy_rook_queen_occ);
+    U64 check_bishop = get_check_bishop(king_sq, all_occ, enemy_bishop_queen_occ);
 
     get_pin_rook(king_sq, current_occ, enemy_occ, enemy_rook_queen_occ, &pin_mask[0]);
     get_pin_bishop(king_sq, current_occ, enemy_occ, enemy_bishop_queen_occ, &pin_mask[2]);
@@ -97,7 +97,7 @@ Position_main_data init_main_data(Position *position, U64 *pin_mask) {
     };
 }
 
-void double_check_analysis(Position_main_data *pos_info, Move *moves, int *ite_moves) {
+void king_escape_analysis(Position_main_data *pos_info, Move *moves, int *ite_moves) {
     U64 king_move =
             king_moves(pos_info->king_sq, pos_info->current_occ) & ~(pos_info->check_rook | pos_info->check_bishop) &
             ~pos_info->att_mask;
@@ -106,15 +106,15 @@ void double_check_analysis(Position_main_data *pos_info, Move *moves, int *ite_m
 
 void check_analysis(Position_main_data *pos_info, Move *moves, int *ite_moves, const U64 *position_occ_pieces,
                     get_moves_func *moves_struct) {
-    pos_info->check_mask = pos_info->check_rook ? pos_info->check_rook : pos_info->check_bishop;
+    pos_info->check_mask = pos_info->check_rook | pos_info->check_bishop;
     for (int i = 0; i < 7; i++) {
-        U64 pin_check_mask = pos_info->sum_pin_mask ? position_occ_pieces[i] & ~pos_info->sum_pin_mask &
-                                                      pos_info->check_mask : position_occ_pieces[i] &
-                                                                             pos_info->check_mask;
-        U64 occ_without_pin = pos_info->sum_pin_mask ? position_occ_pieces[i] & ~pos_info->sum_pin_mask
-                                                     : position_occ_pieces[i];
-        get_move_pin_check(occ_without_pin, pos_info->all_occ, pos_info->current_occ, pin_check_mask,
+        if (i == KING_MOVE) {
+            continue;
+        }
+        U64 occ_without_pin = ~pos_info->sum_pin_mask & position_occ_pieces[i];
+        get_move_pin_check(occ_without_pin, pos_info->all_occ, pos_info->current_occ, pos_info->check_mask,
                            (U64 (*)(Board_move_info)) moves_struct[i], moves, ite_moves, i);
+
     }
 }
 
@@ -140,7 +140,7 @@ void pin_analysis(Position_main_data *pos_info, Move *moves, int *ite_moves, con
 }
 
 void
-en_passant_pin_analysis(U64 en_passant_mask_with_pin, U64 *pin_mask, U64 en_passant_sq1, U64 *ans_en_passant_mask) {
+en_passant_pin_analysis(U64 en_passant_mask_with_pin, const U64 *pin_mask, U64 en_passant_sq1, U64 *ans_en_passant_mask) {
     while (en_passant_mask_with_pin != 0) {
         U64 LS1B = get_LS1B(en_passant_mask_with_pin);
         //3.3.3 possible move with en passant have to be diagonal (start pin_array from 2)
@@ -152,8 +152,9 @@ en_passant_pin_analysis(U64 en_passant_mask_with_pin, U64 *pin_mask, U64 en_pass
         en_passant_mask_with_pin ^= LS1B;
     }
 }
-
+#include "../../include/chess/console_visualization.h"
 void position_analysis(Position *position, Move *moves, int *ite_moves) {
+
     U64 pin_mask[4] = {0};
     Position_main_data pos_info = init_main_data(position, pin_mask);
 
@@ -172,19 +173,20 @@ void position_analysis(Position *position, Move *moves, int *ite_moves) {
     //1. moves analysis depends on double check, check and without check
     //1.1 double check
     if (pos_info.check_rook != 0 && pos_info.check_bishop != 0) {
-        double_check_analysis(&pos_info, moves, ite_moves);
+        king_escape_analysis(&pos_info, moves, ite_moves);
         return;
     }
-        //1.2 check
+    //1.2 check
     else if (pos_info.check_rook != 0 || pos_info.check_bishop != 0) {
         //1.2.1 get moves with check_mask and without pin pieces
         check_analysis(&pos_info, moves, ite_moves, position_occ_pieces, moves_struct);
+        king_escape_analysis(&pos_info, moves, ite_moves);
         //1.2.2 create pin_mask & check_mask - *if there is a check pin piece can move only on pin_mask and check_mask
         for (int i = 0; i < 4; i++) {
             pin_mask[i] &= pos_info.check_mask;
         }
     }
-        //1.3 without check
+    //1.3 without check
     else {
         //1.3.1 get moves without check_mask and without pin pieces
         without_check_analysis(&pos_info, moves, ite_moves, position_occ_pieces, moves_struct);
