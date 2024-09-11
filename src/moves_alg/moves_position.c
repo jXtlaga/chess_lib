@@ -22,7 +22,7 @@ Position create_start_position(){
     pos.move_number = 0;
     pos.half_move_clock = 0;
 
-    pos.en_passant_white_sq = 0;
-    pos.en_passant_black_sq = 0;
+    pos.en_passant = 0;
+
     return pos;
 }

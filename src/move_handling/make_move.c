@@ -60,10 +60,10 @@ Position make_move(Position position, U8 from, U64 to, TYPE_MOVE type_move) {
     Pieces_position *current_pieces = (side == WHITE) ? &new_position.white_pieces : &new_position.black_pieces;
     Pieces_position *enemy_pieces = (side == WHITE) ? &new_position.black_pieces : &new_position.white_pieces;
 
-    new_position.en_passant_white_sq = 0;
-    new_position.en_passant_black_sq = 0;
+    new_position.en_passant = 0;
 
     U64 current_occ = get_occ(current_pieces);
+
 
     U8 *current_castling_rights = (side == WHITE) ? &new_position.castling_white_rights
                                                   : &new_position.castling_black_rights;
@@ -80,9 +80,13 @@ Position make_move(Position position, U8 from, U64 to, TYPE_MOVE type_move) {
             break;
         }
         case EN_PASSANT: {
-            current_pieces->pawn = from_sq1;
+            /* en passant is exception
+             * "to" - is occ of pieces that can do en_passant
+             * "from" - is occ of en passant square
+             */
+            current_pieces->pawn |= from_sq1;
             current_pieces->pawn ^= to;
-            enemy_pieces->pawn ^= (side == WHITE) ? (to >> 8) : (to << 8);
+            enemy_pieces->pawn ^= (side == WHITE) ? (from_sq1 >> 8) : (from_sq1 << 8);
             break;
         }
         case PROMOTION_QUEEN: {
@@ -139,9 +143,9 @@ Position make_move(Position position, U8 from, U64 to, TYPE_MOVE type_move) {
         }
         case PAWN_MOVE_START: {
             if (side == WHITE) {
-                new_position.en_passant_white_sq = is_en_passant_white_valid(to);
+                new_position.en_passant = is_en_passant_white_valid(to);
             } else {
-                new_position.en_passant_black_sq = is_en_passant_black_valid(to);
+                new_position.en_passant = is_en_passant_black_valid(to);
             }
             move_and_remove_piece(&current_pieces->pawn, enemy_pieces, from_sq1, to);
             break;

@@ -108,3 +108,12 @@ void print_positions(Position *positions, U64 *attacks, int num_positions) {
     }
     printf("\n");
 }
+void print_position_with_info(Position *position){
+    position->move_number & 1 ? printf("Black to move\n") : printf("White to move\n");
+    printf("castling white rights: %d\n", position->castling_white_rights);
+    printf("castling black rights: %d\n", position->castling_black_rights);
+    printf("en passant: %d\n", position->en_passant);
+    printf("half move clock: %d\n", position->half_move_clock);
+    printf("move number: %d\n", position->move_number);
+    print_position(position, 0);
+}

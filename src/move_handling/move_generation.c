@@ -1,3 +1,4 @@
+#include <printf.h>
 #include "../../include/chess/moves_alg/move_generation.h"
 #include "../../include/chess/moves_alg/moves_pieces.h"
 #include "../../include/chess/mask_alg/attack_mask.h"
@@ -9,6 +10,7 @@
 #include "../../include/chess/castling_validation.h"
 
 void add_move(Move *piece_move, int *ite_moves, int from, U64 to, TYPE_MOVE type) {
+    if(to == 0) return;
     piece_move[*ite_moves].from = from;
     piece_move[*ite_moves].to = to;
     piece_move[*ite_moves].type = type;
@@ -202,7 +204,7 @@ void position_analysis(Position *position, Move *moves, int *ite_moves) {
     }
 
     //3. en passant
-    U8 en_passant_sq = pos_info.side == WHITE ? position->en_passant_white_sq : position->en_passant_black_sq;
+    U8 en_passant_sq = position->en_passant;
     //3.1 is enemy move  - there is po en passant
     if (en_passant_sq != 0) {
         //3.2 get en passant mask (pawns_occ that can do en_passant)
@@ -215,6 +217,7 @@ void position_analysis(Position *position, Move *moves, int *ite_moves) {
             U64 ans_en_passant_mask = 0;
             U64 en_passant_sq1 = 1ULL << en_passant_sq;
             U64 en_passant_mask_without_pin = en_passant_mask & ~pos_info.sum_pin_mask;
+
             U64 en_passant_mask_with_pin = en_passant_mask & pos_info.sum_pin_mask;
             //3.3.1 check en passant without pin
             if (en_passant_mask_without_pin != 0)

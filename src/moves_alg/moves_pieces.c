@@ -30,6 +30,7 @@ U64 bishop_moves_struct(Board_move_info *info){
 U64 queen_moves(int sq, U64 all_occ, U64 current_color_occ){
     return (get_bishop_attack(all_occ, sq) | get_rook_attack(all_occ, sq)) & ~current_color_occ;
 }
+
 U64 queen_moves_struct(Board_move_info *info){
     return (get_bishop_attack(info->all_occ, info->sq) | get_rook_attack(info->all_occ, info->sq)) & ~info->current_color_occ;
 }
@@ -54,18 +55,18 @@ U64 white_pawn_moves_start(int sq, U64 all_occ, U64 current_color_occ, U64 enemy
     return move | attack;
 }
 U64 white_pawn_moves_start_struct(Board_move_info *info){
-    U64 move = get_rook_attack(info->all_occ, info->sq) & get_white_pawn_move(info->sq);
+    U64 move = get_rook_attack(info->all_occ, info->sq) & ~(info->all_occ) & get_white_pawn_move(info->sq);
     U64 attack = get_white_pawn_attack(info->sq) & info->enemy_color_occ;
     return move | attack;
 }
 
 U64 black_pawn_moves_start(int sq, U64 all_occ, U64 current_color_occ, U64 enemy_color_occ){
-    U64 move = get_rook_attack( all_occ, sq) & ~current_color_occ & get_black_pawn_move(sq);
+    U64 move = get_rook_attack( all_occ, sq) & ~all_occ & get_black_pawn_move(sq);
     U64 attack = get_black_pawn_attack(sq) & enemy_color_occ;
     return move | attack;
 }
 U64 black_pawn_moves_start_struct(Board_move_info *info){
-    U64 move = get_rook_attack(info->all_occ, info->sq) & ~(info->current_color_occ) & get_black_pawn_move(info->sq);
+    U64 move = get_rook_attack(info->all_occ, info->sq) & ~(info->all_occ) & get_black_pawn_move(info->sq);
     U64 attack = get_black_pawn_attack(info->sq) & info->enemy_color_occ;
     return move | attack;
 }
@@ -91,7 +92,6 @@ U64 black_pawn_moves_struct(Board_move_info *info){
     U64 attack = get_black_pawn_attack(info->sq) & info->enemy_color_occ;
     return move | attack;
 }
-
 
 void init_moves(){
     init_rook();
