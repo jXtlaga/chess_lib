@@ -162,25 +162,22 @@ void position_analysis(Position *position, Move *moves, int *ite_moves) {
                                                                                                       pos_info.current_pieces_position.pawn;
     U64 position_pawn_after_start = pos_info.current_pieces_position.pawn ^ position_pawn_start;
     U64 position_occ_pieces[7] = {position_pawn_start, position_pawn_after_start, pos_info.current_pieces_position.rook, pos_info.current_pieces_position.knight,
-                                  pos_info.current_pieces_position.bishop, pos_info.current_pieces_position.queen,
-                                  pos_info.current_pieces_position.king};
+                                  pos_info.current_pieces_position.bishop, pos_info.current_pieces_position.queen};
     get_moves_func moves_struct[7] = {pos_info.side == WHITE ? white_pawn_moves_start_struct
                                                              : black_pawn_moves_start_struct,
-                                      pos_info.side == WHITE ? white_pawn_moves_struct : black_pawn_moves_struct, rook_moves_struct, knight_moves_struct, bishop_moves_struct, queen_moves_struct,
-                                      king_moves_struct};
+                                      pos_info.side == WHITE ? white_pawn_moves_struct : black_pawn_moves_struct, rook_moves_struct, knight_moves_struct, bishop_moves_struct, queen_moves_struct};
 
 
     //1. moves analysis depends on double check, check and without check
+    king_escape_analysis(&pos_info, moves, ite_moves);
     //1.1 double check
     if (pos_info.check_rook != 0 && pos_info.check_bishop != 0) {
-        king_escape_analysis(&pos_info, moves, ite_moves);
         return;
     }
     //1.2 check
     else if (pos_info.check_rook != 0 || pos_info.check_bishop != 0) {
         //1.2.1 get moves with check_mask and without pin pieces
         check_analysis(&pos_info, moves, ite_moves, position_occ_pieces, moves_struct);
-        king_escape_analysis(&pos_info, moves, ite_moves);
         //1.2.2 create pin_mask & check_mask - *if there is a check pin piece can move only on pin_mask and check_mask
         for (int i = 0; i < 4; i++) {
             pin_mask[i] &= pos_info.check_mask;

@@ -96,6 +96,9 @@ void search_depth(int depth_max, Position position) {
         //2.5 play
         //2.6 analyse the new position
         depth_level++;
+        print_search_vertices(new_position, depth_level);
+        print_search_way(last_positions, depth_level);
+        printf("Count vertices: %d\n", count_vertices[depth_level]);
         Position history_search[depth_max+1];
         for(int i = 0; i < depth_level; i++){
             history_search[i] = last_positions[i];
@@ -139,14 +142,9 @@ int main() {
 
     Move moves[16] = {0};
     int ite_moves = 0;
-    print_position(&position, 0);
-    position_analysis(&position, moves, &ite_moves);
-    printf("Moves: %d\n", ite_moves);
-    for(int i = 0; i < ite_moves; i++) {
-        print_type_move(moves[i].type);
-        print_bitboard(moves[i].to);
-    }
-    search_depth(3, position);
+
+
+    search_depth(4, position);
 
     return 0;
 }
