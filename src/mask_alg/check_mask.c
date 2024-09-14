@@ -21,7 +21,6 @@ U64 get_check_rook(int king_sq, U64 all_occ, U64 enemy_rook_queen_occ){
     U64 attackers = mask & enemy_rook_queen_occ;
     if ((mask & enemy_rook_queen_occ) != 0){
         U64 attackers_mask = get_rook_attack(all_occ, get_one_bit_index(get_LS1B(attackers)));
-
         mask &= attackers_mask;
         mask |= attackers;
         return mask;
@@ -40,3 +39,13 @@ U64 get_check_bishop(int king_sq, U64 all_occ, U64 enemy_bishop_queen_occ){
     }
     return 0;
 }
+U64 get_check_knight(int king_sq, U64 enemy_knight_occ){
+    U64 mask = get_knight_attack(king_sq);
+    return mask & enemy_knight_occ;
+}
+
+U64 get_check_pawn(int king_sq, U64 enemy_pawn_occ, COLOR king_side) {
+    U64 mask = king_side == WHITE ? get_white_pawn_attack(king_sq) : get_black_pawn_attack(king_sq);
+    return mask & enemy_pawn_occ;
+}
+

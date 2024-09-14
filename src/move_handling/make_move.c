@@ -62,21 +62,16 @@ Position make_move(Position position, U8 from, U64 to, TYPE_MOVE type_move) {
 
     new_position.en_passant = 0;
 
-    U64 current_occ = get_occ(current_pieces);
-
-
     U8 *current_castling_rights = (side == WHITE) ? &new_position.castling_white_rights
                                                   : &new_position.castling_black_rights;
+    U8 *enemy_castling_rights = (side == WHITE) ? &new_position.castling_black_rights
+                                                : &new_position.castling_white_rights;
     U64 from_sq1 = 1ULL << from;
     switch (type_move) {
         case CASTLING: {
-            bool is_short_castling = (castling_short_right & to) != 0;
-            bool is_long_castling = (castling_long_right & to) != 0;
-
-            if (is_short_castling || is_long_castling) {
-                play_castling(&current_pieces->king, &current_pieces->rook, side, is_short_castling);
-                *current_castling_rights = 0;
-            }
+            bool is_short_castling = (castling_short_right & to) != 0? true : false;
+            play_castling(&current_pieces->king, &current_pieces->rook, side, is_short_castling);
+            *current_castling_rights = 0;
             break;
         }
         case EN_PASSANT: {
@@ -91,37 +86,28 @@ Position make_move(Position position, U8 from, U64 to, TYPE_MOVE type_move) {
         }
         case PROMOTION_QUEEN: {
             promote_pawn(&current_pieces->pawn, &current_pieces->queen, from_sq1, to);
+            remove_enemy_piece(to, enemy_pieces);
             break;
         }
         case PROMOTION_ROOK: {
             promote_pawn(&current_pieces->pawn, &current_pieces->rook, from_sq1, to);
+            remove_enemy_piece(to, enemy_pieces);
             break;
         }
         case PROMOTION_BISHOP: {
             promote_pawn(&current_pieces->pawn, &current_pieces->bishop, from_sq1, to);
+            remove_enemy_piece(to, enemy_pieces);
             break;
         }
         case PROMOTION_KNIGHT: {
             promote_pawn(&current_pieces->pawn, &current_pieces->knight, from_sq1, to);
+            remove_enemy_piece(to, enemy_pieces);
             break;
         }
         case ROOK_MOVE: {
-            if (side == WHITE) {
-                if (is_castling_white_short_invalided(current_occ) == false) {
-                    *current_castling_rights &= ~castling_short_right;
-                }
-                if (is_castling_white_long_invalided(current_occ) == false) {
-                    *current_castling_rights &= ~castling_short_right;
-                }
-            } else {
-                if (is_castling_black_long_invalided(current_occ) == true) {
-                    *current_castling_rights &= ~castling_long_right;
-                }
-                if (is_castling_black_short_invalided(current_occ) == true) {
-                    *current_castling_rights &= ~castling_short_right;
-                }
-            }
             move_and_remove_piece(&current_pieces->rook, enemy_pieces, from_sq1, to);
+
+
             break;
         }
         case BISHOP_MOVE: {
@@ -153,6 +139,35 @@ Position make_move(Position position, U8 from, U64 to, TYPE_MOVE type_move) {
         case PAWN_MOVE: {
             move_and_remove_piece(&current_pieces->pawn, enemy_pieces, from_sq1, to);
             break;
+        }
+    }
+    U64 current_king_rook_occ = current_pieces->rook | current_pieces->king;
+    U64 enemy_king_rook_occ = enemy_pieces->rook | enemy_pieces->king;
+    if (side == WHITE) {
+        if (is_castling_white_short_valid(current_king_rook_occ) == false) {
+            *current_castling_rights &= ~castling_short_right;
+        }
+        if (is_castling_white_long_valid(current_king_rook_occ) == false) {
+            *current_castling_rights &= ~castling_long_right;
+        }
+        if (is_castling_black_short_valid(enemy_king_rook_occ) == false) {
+            *enemy_castling_rights &= ~castling_short_right;
+        }
+        if (is_castling_black_long_valid(enemy_king_rook_occ) == false) {
+            *enemy_castling_rights &= ~castling_long_right;
+        }
+    } else {
+        if (is_castling_white_short_valid(enemy_king_rook_occ) == false) {
+            *enemy_castling_rights &= ~castling_short_right;
+        }
+        if (is_castling_white_long_valid(enemy_king_rook_occ) == false) {
+            *enemy_castling_rights &= ~castling_long_right;
+        }
+        if (is_castling_black_short_valid(current_king_rook_occ) == false) {
+            *current_castling_rights &= ~castling_short_right;
+        }
+        if (is_castling_black_long_valid(current_king_rook_occ) == false) {
+            *current_castling_rights &= ~castling_long_right;
         }
     }
 

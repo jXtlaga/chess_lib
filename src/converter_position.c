@@ -29,6 +29,7 @@ U64 *char_to_piece_occ(Position *position, char piece) {
         case 'k':
             return &piece_position->king;
         default:
+            printf("Unknown piece %c\n", piece_type);
             assert(false);
     }
 }
@@ -127,7 +128,7 @@ Position fen_to_position(char *fen) {
         full_move_number = full_move_number * 10 + (*fen - '0');
         fen++;
     }
-    position.move_number += full_move_number;
+    position.move_number += full_move_number * 2;
 
 
 

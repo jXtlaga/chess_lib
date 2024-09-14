@@ -8,6 +8,7 @@
 #include "../../include/chess/moves/knight_attack.h"
 #include "../../include/chess/moves/pawn_attack.h"
 #include "../../include/chess/moves/king_attack.h"
+#include "../../include/chess/board_visualisation.h"
 
 /**
  * occ - occupancy of the board
@@ -49,8 +50,8 @@ U64 king_moves_struct(Board_move_info *info){
     return get_king_attack(info->sq) & ~info->current_color_occ;
 }
 
-U64 white_pawn_moves_start(int sq, U64 all_occ, U64 current_color_occ, U64 enemy_color_occ){
-    U64 move = get_rook_attack(all_occ, sq)  & ~current_color_occ & get_white_pawn_move(sq);
+U64 white_pawn_moves_start(int sq, U64 all_occ, U64 enemy_color_occ){
+    U64 move = get_rook_attack(all_occ, sq)  & ~all_occ & get_white_pawn_move(sq);
     U64 attack = get_white_pawn_attack(sq) & enemy_color_occ;
     return move | attack;
 }
@@ -60,7 +61,7 @@ U64 white_pawn_moves_start_struct(Board_move_info *info){
     return move | attack;
 }
 
-U64 black_pawn_moves_start(int sq, U64 all_occ, U64 current_color_occ, U64 enemy_color_occ){
+U64 black_pawn_moves_start(int sq, U64 all_occ, U64 enemy_color_occ){
     U64 move = get_rook_attack( all_occ, sq) & ~all_occ & get_black_pawn_move(sq);
     U64 attack = get_black_pawn_attack(sq) & enemy_color_occ;
     return move | attack;

@@ -43,7 +43,7 @@ Move_console get_moves_console(Position *position, int sq, COLOR color, U64 curr
     if((current_color_occ & sq1) != 0) {
         if (pieces->pawn & sq1) {
             if ((color == WHITE && sq >= 8 && sq < 16) || (color == BLACK && sq >= 48 && sq < 56)) {
-                return (Move_console) {&pieces->pawn, color == WHITE ? white_pawn_moves_start(sq, all_occ, current_color_occ, enemy_color_occ) : black_pawn_moves_start(sq, all_occ, current_color_occ, enemy_color_occ)};
+                return (Move_console) {&pieces->pawn, color == WHITE ? white_pawn_moves_start(sq, all_occ, enemy_color_occ) : black_pawn_moves_start(sq, all_occ, enemy_color_occ)};
             }
             return (Move_console) {&pieces->pawn, color == WHITE ? white_pawn_moves(sq, all_occ, current_color_occ) : black_pawn_moves(sq, all_occ, current_color_occ)};
         }

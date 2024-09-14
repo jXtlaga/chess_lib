@@ -36,6 +36,6 @@ U64 get_full_enemy_attack_mask(Pieces_position enemy_pieces, U64 all_occ_without
     attack_mask |= get_enemy_attack_mask_rook_bishop(enemy_pieces.bishop | enemy_pieces.queen, all_occ_without_king, get_bishop_attack);
     attack_mask |= get_one_enemy_attack_mask_knight_king_pawn(enemy_pieces.knight, get_knight_attack);
     attack_mask |= get_one_enemy_attack_mask_knight_king_pawn(enemy_pieces.king, get_king_attack);
-    attack_mask |= get_one_enemy_attack_mask_knight_king_pawn(enemy_pieces.pawn, side == WHITE ? get_black_pawn_move : get_white_pawn_move);
+    attack_mask |= get_one_enemy_attack_mask_knight_king_pawn(enemy_pieces.pawn, side == WHITE ? get_black_pawn_attack : get_white_pawn_attack);
     return attack_mask;
 }
