@@ -3,10 +3,10 @@
 //
 
 #include "../../include/chess/mask_alg/pin_mask.h"
-#include "../../include/chess/algorithms/bits_alghorithms.h"
+#include "../../include/chess/algorithms/bits_algorithms.h"
 #include "../../include/chess/moves/rook_attack.h"
 #include "../../include/chess/moves/bishop_attack.h"
-#include "../../include/chess/algorithms/squares_alghorithms.h"
+#include "../../include/chess/algorithms/squares_algorithms.h"
 
 U64 get_pin_side(U64 side_attackers, U64 king_sq1, U64 king_super_attack, U64 current_color_occ, U64 enemy_color_occ, U64(get_attack)(U64, int)){
     U64 ans = 0;

@@ -6,13 +6,27 @@ set(CMAKE_C_STANDARD 11)
 add_executable(chess_c_lib
         src/main.c
         src/board_visualisation.c
-        src/combinatorics_mask.c
-        src/moves_alg/bishop_attack.c
-        src/bits_alghorithms.c
-        src/moves_calculation.c
-        src/squares_alghorithms.c
-        src/moves_alg/rook_attack.c
-        src/moves_alg/knight_attack.c
-        src/moves_alg/king_attack.c
-        src/moves_alg/pawn_attack.c
+        src/algorithms/combinatorics_mask.c
+        src/attack_generation/bishop_attack.c
+        src/algorithms/bits_alghorithms.c
+        src/moves_alg/moves_calculation.c
+        src/algorithms/squares_alghorithms.c
+        src/attack_generation/rook_attack.c
+        src/attack_generation/knight_attack.c
+        src/attack_generation/king_attack.c
+        src/attack_generation/pawn_attack.c
+        src/moves_alg/moves_position.c
+        src/console/console_chess.c
+        src/console/console_visualization.c
+        src/moves_alg/moves_pieces.c
+        src/mask_alg/check_mask.c
+        src/converter_position.c
+        src/mask_alg/pin_mask.c
+        src/mask_alg/attack_mask.c
+        src/move_handling/move_generation.c
+        src/move_handling/make_move.c
+        src/castling_en_passant_handling/castling_validation.c
+        src/castling_en_passant_handling/en_passant_validation.c
+        include/chess/search/search_tree.h
+        src/search_moves/search_tree.c
 )

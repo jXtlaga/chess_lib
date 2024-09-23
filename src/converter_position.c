@@ -6,7 +6,7 @@
 #include <printf.h>
 #include "../include/chess/converter_position.h"
 #include "assert.h"
-#include "../include/chess/algorithms/bits_alghorithms.h"
+#include "../include/chess/algorithms/bits_algorithms.h"
 
 bool is_white(char piece) {
     return isupper(piece);

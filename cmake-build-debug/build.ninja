@@ -51,69 +51,147 @@ build cmake_object_order_depends_target_chess_c_lib: phony || CMakeFiles/chess_c
 
 build CMakeFiles/chess_c_lib.dir/src/main.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/main.c || cmake_object_order_depends_target_chess_c_lib
   DEP_FILE = CMakeFiles/chess_c_lib.dir/src/main.c.o.d
-  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/chess_c_lib.dir
   OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src
 
 build CMakeFiles/chess_c_lib.dir/src/board_visualisation.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/board_visualisation.c || cmake_object_order_depends_target_chess_c_lib
   DEP_FILE = CMakeFiles/chess_c_lib.dir/src/board_visualisation.c.o.d
-  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/chess_c_lib.dir
   OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src
 
-build CMakeFiles/chess_c_lib.dir/src/combinatorics_mask.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/combinatorics_mask.c || cmake_object_order_depends_target_chess_c_lib
-  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/combinatorics_mask.c.o.d
-  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
+build CMakeFiles/chess_c_lib.dir/src/algorithms/combinatorics_mask.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/algorithms/combinatorics_mask.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/algorithms/combinatorics_mask.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/algorithms
+
+build CMakeFiles/chess_c_lib.dir/src/attack_generation/bishop_attack.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/attack_generation/bishop_attack.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/attack_generation/bishop_attack.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/attack_generation
+
+build CMakeFiles/chess_c_lib.dir/src/algorithms/bits_alghorithms.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/algorithms/bits_alghorithms.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/algorithms/bits_alghorithms.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/algorithms
+
+build CMakeFiles/chess_c_lib.dir/src/moves_alg/moves_calculation.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/moves_alg/moves_calculation.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/moves_alg/moves_calculation.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/moves_alg
+
+build CMakeFiles/chess_c_lib.dir/src/algorithms/squares_alghorithms.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/algorithms/squares_alghorithms.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/algorithms/squares_alghorithms.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/algorithms
+
+build CMakeFiles/chess_c_lib.dir/src/attack_generation/rook_attack.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/attack_generation/rook_attack.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/attack_generation/rook_attack.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/attack_generation
+
+build CMakeFiles/chess_c_lib.dir/src/attack_generation/knight_attack.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/attack_generation/knight_attack.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/attack_generation/knight_attack.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/attack_generation
+
+build CMakeFiles/chess_c_lib.dir/src/attack_generation/king_attack.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/attack_generation/king_attack.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/attack_generation/king_attack.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/attack_generation
+
+build CMakeFiles/chess_c_lib.dir/src/attack_generation/pawn_attack.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/attack_generation/pawn_attack.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/attack_generation/pawn_attack.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/attack_generation
+
+build CMakeFiles/chess_c_lib.dir/src/moves_alg/moves_position.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/moves_alg/moves_position.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/moves_alg/moves_position.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/moves_alg
+
+build CMakeFiles/chess_c_lib.dir/src/console/console_chess.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/console/console_chess.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/console/console_chess.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/console
+
+build CMakeFiles/chess_c_lib.dir/src/console/console_visualization.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/console/console_visualization.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/console/console_visualization.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/console
+
+build CMakeFiles/chess_c_lib.dir/src/moves_alg/moves_pieces.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/moves_alg/moves_pieces.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/moves_alg/moves_pieces.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/moves_alg
+
+build CMakeFiles/chess_c_lib.dir/src/mask_alg/check_mask.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/mask_alg/check_mask.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/mask_alg/check_mask.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/mask_alg
+
+build CMakeFiles/chess_c_lib.dir/src/converter_position.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/converter_position.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/converter_position.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/chess_c_lib.dir
   OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src
 
-build CMakeFiles/chess_c_lib.dir/src/moves_alg/bishop_attack.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/moves_alg/bishop_attack.c || cmake_object_order_depends_target_chess_c_lib
-  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/moves_alg/bishop_attack.c.o.d
-  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
+build CMakeFiles/chess_c_lib.dir/src/mask_alg/pin_mask.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/mask_alg/pin_mask.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/mask_alg/pin_mask.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/chess_c_lib.dir
-  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/moves_alg
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/mask_alg
 
-build CMakeFiles/chess_c_lib.dir/src/bits_alghorithms.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/bits_alghorithms.c || cmake_object_order_depends_target_chess_c_lib
-  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/bits_alghorithms.c.o.d
-  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
+build CMakeFiles/chess_c_lib.dir/src/mask_alg/attack_mask.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/mask_alg/attack_mask.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/mask_alg/attack_mask.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/chess_c_lib.dir
-  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/mask_alg
 
-build CMakeFiles/chess_c_lib.dir/src/moves_calculation.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/moves_calculation.c || cmake_object_order_depends_target_chess_c_lib
-  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/moves_calculation.c.o.d
-  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
+build CMakeFiles/chess_c_lib.dir/src/move_handling/move_generation.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/move_handling/move_generation.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/move_handling/move_generation.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/chess_c_lib.dir
-  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/move_handling
 
-build CMakeFiles/chess_c_lib.dir/src/squares_alghorithms.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/squares_alghorithms.c || cmake_object_order_depends_target_chess_c_lib
-  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/squares_alghorithms.c.o.d
-  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
+build CMakeFiles/chess_c_lib.dir/src/move_handling/make_move.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/move_handling/make_move.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/move_handling/make_move.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/chess_c_lib.dir
-  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/move_handling
 
-build CMakeFiles/chess_c_lib.dir/src/moves_alg/rook_attack.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/moves_alg/rook_attack.c || cmake_object_order_depends_target_chess_c_lib
-  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/moves_alg/rook_attack.c.o.d
-  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
+build CMakeFiles/chess_c_lib.dir/src/castling_en_passant_handling/castling_validation.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/castling_en_passant_handling/castling_validation.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/castling_en_passant_handling/castling_validation.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/chess_c_lib.dir
-  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/moves_alg
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/castling_en_passant_handling
 
-build CMakeFiles/chess_c_lib.dir/src/moves_alg/knight_attack.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/moves_alg/knight_attack.c || cmake_object_order_depends_target_chess_c_lib
-  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/moves_alg/knight_attack.c.o.d
-  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
+build CMakeFiles/chess_c_lib.dir/src/castling_en_passant_handling/en_passant_validation.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/castling_en_passant_handling/en_passant_validation.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/castling_en_passant_handling/en_passant_validation.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/chess_c_lib.dir
-  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/moves_alg
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/castling_en_passant_handling
 
-build CMakeFiles/chess_c_lib.dir/src/moves_alg/king_attack.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/moves_alg/king_attack.c || cmake_object_order_depends_target_chess_c_lib
-  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/moves_alg/king_attack.c.o.d
-  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
+build CMakeFiles/chess_c_lib.dir/src/search_moves/search_tree.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/search_moves/search_tree.c || cmake_object_order_depends_target_chess_c_lib
+  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/search_moves/search_tree.c.o.d
+  FLAGS = -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/chess_c_lib.dir
-  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/moves_alg
-
-build CMakeFiles/chess_c_lib.dir/src/moves_alg/pawn_attack.c.o: C_COMPILER__chess_c_lib_unscanned_Debug /Users/jantlaga/CLionProjects/chess_c_lib/src/moves_alg/pawn_attack.c || cmake_object_order_depends_target_chess_c_lib
-  DEP_FILE = CMakeFiles/chess_c_lib.dir/src/moves_alg/pawn_attack.c.o.d
-  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/chess_c_lib.dir
-  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/moves_alg
+  OBJECT_FILE_DIR = CMakeFiles/chess_c_lib.dir/src/search_moves
 
 
 # =============================================================================
@@ -123,8 +201,8 @@ build CMakeFiles/chess_c_lib.dir/src/moves_alg/pawn_attack.c.o: C_COMPILER__ches
 #############################################
 # Link the executable chess_c_lib
 
-build chess_c_lib: C_EXECUTABLE_LINKER__chess_c_lib_Debug CMakeFiles/chess_c_lib.dir/src/main.c.o CMakeFiles/chess_c_lib.dir/src/board_visualisation.c.o CMakeFiles/chess_c_lib.dir/src/combinatorics_mask.c.o CMakeFiles/chess_c_lib.dir/src/moves_alg/bishop_attack.c.o CMakeFiles/chess_c_lib.dir/src/bits_alghorithms.c.o CMakeFiles/chess_c_lib.dir/src/moves_calculation.c.o CMakeFiles/chess_c_lib.dir/src/squares_alghorithms.c.o CMakeFiles/chess_c_lib.dir/src/moves_alg/rook_attack.c.o CMakeFiles/chess_c_lib.dir/src/moves_alg/knight_attack.c.o CMakeFiles/chess_c_lib.dir/src/moves_alg/king_attack.c.o CMakeFiles/chess_c_lib.dir/src/moves_alg/pawn_attack.c.o
-  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk
+build chess_c_lib: C_EXECUTABLE_LINKER__chess_c_lib_Debug CMakeFiles/chess_c_lib.dir/src/main.c.o CMakeFiles/chess_c_lib.dir/src/board_visualisation.c.o CMakeFiles/chess_c_lib.dir/src/algorithms/combinatorics_mask.c.o CMakeFiles/chess_c_lib.dir/src/attack_generation/bishop_attack.c.o CMakeFiles/chess_c_lib.dir/src/algorithms/bits_alghorithms.c.o CMakeFiles/chess_c_lib.dir/src/moves_alg/moves_calculation.c.o CMakeFiles/chess_c_lib.dir/src/algorithms/squares_alghorithms.c.o CMakeFiles/chess_c_lib.dir/src/attack_generation/rook_attack.c.o CMakeFiles/chess_c_lib.dir/src/attack_generation/knight_attack.c.o CMakeFiles/chess_c_lib.dir/src/attack_generation/king_attack.c.o CMakeFiles/chess_c_lib.dir/src/attack_generation/pawn_attack.c.o CMakeFiles/chess_c_lib.dir/src/moves_alg/moves_position.c.o CMakeFiles/chess_c_lib.dir/src/console/console_chess.c.o CMakeFiles/chess_c_lib.dir/src/console/console_visualization.c.o CMakeFiles/chess_c_lib.dir/src/moves_alg/moves_pieces.c.o CMakeFiles/chess_c_lib.dir/src/mask_alg/check_mask.c.o CMakeFiles/chess_c_lib.dir/src/converter_position.c.o CMakeFiles/chess_c_lib.dir/src/mask_alg/pin_mask.c.o CMakeFiles/chess_c_lib.dir/src/mask_alg/attack_mask.c.o CMakeFiles/chess_c_lib.dir/src/move_handling/move_generation.c.o CMakeFiles/chess_c_lib.dir/src/move_handling/make_move.c.o CMakeFiles/chess_c_lib.dir/src/castling_en_passant_handling/castling_validation.c.o CMakeFiles/chess_c_lib.dir/src/castling_en_passant_handling/en_passant_validation.c.o CMakeFiles/chess_c_lib.dir/src/search_moves/search_tree.c.o
+  FLAGS = -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk
   OBJECT_DIR = CMakeFiles/chess_c_lib.dir
   POST_BUILD = :
   PRE_LINK = :

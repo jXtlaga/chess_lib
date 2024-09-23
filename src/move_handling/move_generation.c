@@ -3,10 +3,10 @@
 #include "../../include/chess/moves_alg/move_generation.h"
 #include "../../include/chess/moves_alg/moves_pieces.h"
 #include "../../include/chess/mask_alg/attack_mask.h"
-#include "../../include/chess/algorithms/bits_alghorithms.h"
+#include "../../include/chess/algorithms/bits_algorithms.h"
 #include "../../include/chess/mask_alg/check_mask.h"
 #include "../../include/chess/mask_alg/pin_mask.h"
-#include "../../include/chess/algorithms/squares_alghorithms.h"
+#include "../../include/chess/algorithms/squares_algorithms.h"
 #include "../../include/chess/en_passant_validation.h"
 #include "../../include/chess/castling_validation.h"
 
@@ -66,7 +66,7 @@ typedef struct Position_main_data {
     U64 check_mask;
     U64 att_mask;
     U64 sum_pin_mask;
-    U8 castling_rights;
+    U8 current_castling_rights;
 } Position_main_data;
 
 Position_main_data init_main_data(Position *position, U64 *pin_mask) {
@@ -99,6 +99,7 @@ Position_main_data init_main_data(Position *position, U64 *pin_mask) {
     U64 att_mask = get_full_enemy_attack_mask(enemy_pieces_position, all_occ ^ king_sq1, side);
 
     U8 castling_rights = side == WHITE ? position->castling_white_rights : position->castling_black_rights;
+
     return (Position_main_data) {side, current_occ, enemy_occ, all_occ,
                                  current_pieces_position, king_sq,
                                  check_rook, check_bishop,check_knight, check_pawn,
@@ -157,10 +158,62 @@ en_passant_pin_analysis(U64 en_passant_mask_with_pin, const U64 *pin_mask, U64 e
         en_passant_mask_with_pin ^= LS1B;
     }
 }
+void castling_analysis_half(U8 *current_castling_rights, U64 current_rook_occ, U64 current_king_occ, COLOR side) {
+    U64 king_rook_occ = current_rook_occ | current_king_occ;
+    if (side == WHITE){
+        if (is_castling_white_short_valid(king_rook_occ) == false)
+            *current_castling_rights &= ~castling_short_right;
+        if (is_castling_white_long_valid(king_rook_occ) == false)
+            *current_castling_rights &= ~castling_long_right;
+    }
+    else {
+        if (is_castling_black_short_valid(king_rook_occ) == false)
+            *current_castling_rights &= ~castling_short_right;
+        if (is_castling_black_long_valid(king_rook_occ) == false)
+            *current_castling_rights &= ~castling_long_right;
+    }
+}
 #include "../../include/chess/console_visualization.h"
 #include "../../include/chess/board_visualisation.h"
 
 void position_analysis(Position *position, Move *moves, int *ite_moves) {
+    const COLOR side = position->move_number & 1 ? BLACK : WHITE;
+    Pieces_position *current_pieces = (side == WHITE) ? &position->white_pieces : &position->black_pieces;
+    Pieces_position *enemy_pieces = (side == WHITE) ? &position->black_pieces : &position->white_pieces;
+
+    U8 *current_castling_rights = (side == WHITE) ? &position->castling_white_rights
+                                                  : &position->castling_black_rights;
+    U8 *enemy_castling_rights = (side == WHITE) ? &position->castling_black_rights
+                                                : &position->castling_white_rights;
+    U64 current_king_rook_occ = current_pieces->rook | current_pieces->king;
+    U64 enemy_king_rook_occ = enemy_pieces->rook | enemy_pieces->king;
+    if (side == WHITE) {
+        if (is_castling_white_short_valid(current_king_rook_occ) == false) {
+            *current_castling_rights &= ~castling_short_right;
+        }
+        if (is_castling_white_long_valid(current_king_rook_occ) == false) {
+            *current_castling_rights &= ~castling_long_right;
+        }
+        if (is_castling_black_short_valid(enemy_king_rook_occ) == false) {
+            *enemy_castling_rights &= ~castling_short_right;
+        }
+        if (is_castling_black_long_valid(enemy_king_rook_occ) == false) {
+            *enemy_castling_rights &= ~castling_long_right;
+        }
+    } else {
+        if (is_castling_white_short_valid(enemy_king_rook_occ) == false) {
+            *enemy_castling_rights &= ~castling_short_right;
+        }
+        if (is_castling_white_long_valid(enemy_king_rook_occ) == false) {
+            *enemy_castling_rights &= ~castling_long_right;
+        }
+        if (is_castling_black_short_valid(current_king_rook_occ) == false) {
+            *current_castling_rights &= ~castling_short_right;
+        }
+        if (is_castling_black_long_valid(current_king_rook_occ) == false) {
+            *current_castling_rights &= ~castling_long_right;
+        }
+    }
 
     U64 pin_mask[4] = {0};
     Position_main_data pos_info = init_main_data(position, pin_mask);
@@ -173,6 +226,9 @@ void position_analysis(Position *position, Move *moves, int *ite_moves) {
     get_moves_func moves_struct[6] = {pos_info.side == WHITE ? white_pawn_moves_struct
                                                              : black_pawn_moves_struct,
                                       pos_info.side == WHITE ? white_pawn_moves_start_struct : black_pawn_moves_start_struct, rook_moves_struct, knight_moves_struct, bishop_moves_struct, queen_moves_struct};
+
+
+
     //0.1 king escape analysis
     king_escape_analysis(&pos_info, moves, ite_moves);
     //1. moves analysis depends on double check, check and without check
@@ -266,7 +322,7 @@ void position_analysis(Position *position, Move *moves, int *ite_moves) {
     //4. castling
     U64 ans_castling = 0;
     //4.1 check if position have castling rights
-    if (pos_info.castling_rights & castling_short_right) {
+    if (pos_info.current_castling_rights & castling_short_right) {
         //4.2 check if castling is possible
         U8 is_castling_possible =
                 pos_info.side == WHITE ? is_castling_short_white_possible(pos_info.current_occ, pos_info.enemy_occ, pos_info.att_mask)
@@ -276,7 +332,7 @@ void position_analysis(Position *position, Move *moves, int *ite_moves) {
         }
 
     }
-    if (pos_info.castling_rights & castling_long_right) {
+    if (pos_info.current_castling_rights & castling_long_right) {
         U8 is_castling_possible =
                 pos_info.side == WHITE ? is_castling_long_white_possible(pos_info.current_occ, pos_info.enemy_occ, pos_info.att_mask)
                                        : is_castling_long_black_possible(pos_info.current_occ, pos_info.enemy_occ, pos_info.att_mask);

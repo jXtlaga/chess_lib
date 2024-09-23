@@ -12,9 +12,9 @@
 #include <assert.h>
 
 #include "../../include/chess/moves/rook_attack.h"
-#include "../../include/chess/algorithms/bits_alghorithms.h"
+#include "../../include/chess/algorithms/bits_algorithms.h"
 #include "../../include/chess/moves/bishop_attack.h"
-#include "../../include/chess/algorithms/squares_alghorithms.h"
+#include "../../include/chess/algorithms/squares_algorithms.h"
 #include "../../include/chess/board_visualisation.h"
 U64 get_check_rook(int king_sq, U64 all_occ, U64 enemy_rook_queen_occ){
     U64 mask = get_rook_attack(all_occ, king_sq);

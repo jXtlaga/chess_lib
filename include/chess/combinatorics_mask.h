@@ -9,11 +9,18 @@
 int count_rook_full_mask(int distance_right, int distance_down);
 int count_bishop_full_mask(int distance_right, int distance_down);
 
+void get_distance_full_rook(int sq, int *distance_array);
+void get_distance_full_bishop(int sq, int *distance_array);
+
 void get_distance_mask_rook(int sq, int *distance_array);
 void get_distance_mask_bishop(int sq, int *distance_array);
 
+
 U64 generate_rook_mask_combination(U64 combination_sequence, int sq, int *distance_direction_rook);
 U64 generate_bishop_mask_combination(U64 combinations_sequence,int sq, int *distance_direction_bishop);
+
+U64 generate_rook_full(int sq);
+U64 generate_bishop_full(int sq);
 
 U64 generate_rook_full_mask(int sq);
 U64 generate_bishop_full_mask(int sq);

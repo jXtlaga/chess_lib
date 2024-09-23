@@ -4,7 +4,7 @@
 
 #include "../../include/chess/en_passant_validation.h"
 #include "../../include/chess/moves/pawn_attack.h"
-#include "../../include/chess/algorithms/bits_alghorithms.h"
+#include "../../include/chess/algorithms/bits_algorithms.h"
 #include "../../include/chess/mask_alg/check_mask.h"
 #include "../../include/chess/moves/bishop_attack.h"
 #include "../../include/chess/moves/rook_attack.h"

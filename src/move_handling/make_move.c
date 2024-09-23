@@ -4,7 +4,7 @@
 
 #include "../../include/chess/make_move.h"
 #include "../../include/chess/moves_alg/moves_pieces.h"
-#include "../../include/chess/algorithms/squares_alghorithms.h"
+#include "../../include/chess/algorithms/squares_algorithms.h"
 #include "../../include/chess/castling_validation.h"
 #include "../../include/chess/en_passant_validation.h"
 #include <assert.h>
@@ -141,35 +141,35 @@ Position make_move(Position position, U8 from, U64 to, TYPE_MOVE type_move) {
             break;
         }
     }
-    U64 current_king_rook_occ = current_pieces->rook | current_pieces->king;
-    U64 enemy_king_rook_occ = enemy_pieces->rook | enemy_pieces->king;
-    if (side == WHITE) {
-        if (is_castling_white_short_valid(current_king_rook_occ) == false) {
-            *current_castling_rights &= ~castling_short_right;
-        }
-        if (is_castling_white_long_valid(current_king_rook_occ) == false) {
-            *current_castling_rights &= ~castling_long_right;
-        }
-        if (is_castling_black_short_valid(enemy_king_rook_occ) == false) {
-            *enemy_castling_rights &= ~castling_short_right;
-        }
-        if (is_castling_black_long_valid(enemy_king_rook_occ) == false) {
-            *enemy_castling_rights &= ~castling_long_right;
-        }
-    } else {
-        if (is_castling_white_short_valid(enemy_king_rook_occ) == false) {
-            *enemy_castling_rights &= ~castling_short_right;
-        }
-        if (is_castling_white_long_valid(enemy_king_rook_occ) == false) {
-            *enemy_castling_rights &= ~castling_long_right;
-        }
-        if (is_castling_black_short_valid(current_king_rook_occ) == false) {
-            *current_castling_rights &= ~castling_short_right;
-        }
-        if (is_castling_black_long_valid(current_king_rook_occ) == false) {
-            *current_castling_rights &= ~castling_long_right;
-        }
-    }
+//    U64 current_king_rook_occ = current_pieces->rook | current_pieces->king;
+//    U64 enemy_king_rook_occ = enemy_pieces->rook | enemy_pieces->king;
+//    if (side == WHITE) {
+//        if (is_castling_white_short_valid(current_king_rook_occ) == false) {
+//            *current_castling_rights &= ~castling_short_right;
+//        }
+//        if (is_castling_white_long_valid(current_king_rook_occ) == false) {
+//            *current_castling_rights &= ~castling_long_right;
+//        }
+//        if (is_castling_black_short_valid(enemy_king_rook_occ) == false) {
+//            *enemy_castling_rights &= ~castling_short_right;
+//        }
+//        if (is_castling_black_long_valid(enemy_king_rook_occ) == false) {
+//            *enemy_castling_rights &= ~castling_long_right;
+//        }
+//    } else {
+//        if (is_castling_white_short_valid(enemy_king_rook_occ) == false) {
+//            *enemy_castling_rights &= ~castling_short_right;
+//        }
+//        if (is_castling_white_long_valid(enemy_king_rook_occ) == false) {
+//            *enemy_castling_rights &= ~castling_long_right;
+//        }
+//        if (is_castling_black_short_valid(current_king_rook_occ) == false) {
+//            *current_castling_rights &= ~castling_short_right;
+//        }
+//        if (is_castling_black_long_valid(current_king_rook_occ) == false) {
+//            *current_castling_rights &= ~castling_long_right;
+//        }
+//    }
 
     return new_position;
 }
