@@ -6,38 +6,23 @@
 #include "../../include/chess/combinatorics_mask.h"
 #include "../../include/chess/moves_alg/moves_calculation.h"
 #include "../../include/chess/algorithms/bits_algorithms.h"
+#include "../../include/chess/algorithms/squares_algorithms.h"
+#include "../../include/chess/console_visualization.h"
+#include "../../include/chess/board_visualisation.h"
+#include "../../include/chess/magic_hash_bishop_rook.h"
 #include <assert.h>
-U64 rook_hash_[64][4096] = {0};
-const U64 ROOK_MASK[] = {0x101010101017e, 0x202020202027c, 0x404040404047a, 0x8080808080876, 0x1010101010106e, 0x2020202020205e, 0x4040404040403e, 0x8080808080807e,
-                        0x1010101017e00, 0x2020202027c00, 0x4040404047a00, 0x8080808087600, 0x10101010106e00, 0x20202020205e00, 0x40404040403e00, 0x80808080807e00,
-                        0x10101017e0100, 0x20202027c0200, 0x40404047a0400, 0x8080808760800, 0x101010106e1000, 0x202020205e2000, 0x404040403e4000, 0x808080807e8000,
-                        0x101017e010100, 0x202027c020200, 0x404047a040400, 0x8080876080800, 0x1010106e101000, 0x2020205e202000, 0x4040403e404000, 0x8080807e808000,
-                        0x1017e01010100, 0x2027c02020200, 0x4047a04040400, 0x8087608080800, 0x10106e10101000, 0x20205e20202000, 0x40403e40404000, 0x80807e80808000,
-                        0x17e0101010100, 0x27c0202020200, 0x47a0404040400, 0x8760808080800, 0x106e1010101000, 0x205e2020202000, 0x403e4040404000, 0x807e8080808000,
-                        0x7e010101010100, 0x7c020202020200, 0x7a040404040400, 0x76080808080800, 0x6e101010101000, 0x5e202020202000, 0x3e404040404000, 0x7e808080808000,
-                        0x7e01010101010100, 0x7c02020202020200, 0x7a04040404040400, 0x7608080808080800, 0x6e10101010101000, 0x5e20202020202000, 0x3e40404040404000, 0x7e80808080808000,
-};
+#include <printf.h>
 
-const int ROOK_MASK_BITS_COUNT[64] = {
-        12, 11, 11, 11, 11, 11, 11, 12,
-        11, 10, 10, 10, 10, 10, 10, 11,
-        11, 10, 10, 10, 10, 10, 10, 11,
-        11, 10, 10, 10, 10, 10, 10, 11,
-        11, 10, 10, 10, 10, 10, 10, 11,
-        11, 10, 10, 10, 10, 10, 10, 11,
-        11, 10, 10, 10, 10, 10, 10, 11,
-        12, 11, 11, 11, 11, 11, 11, 12
-};
-const U64 ROOK_MAGIC[64] = {
-        0xa8002c000108020ULL,0x6c00049b0002001ULL,0x100200010090040ULL,0x2480041000800801ULL,0x280028004000800ULL,0x900410008040022ULL,0x280020001001080ULL,0x2880002041000080ULL,
-        0xa000800080400034ULL,0x4808020004000ULL,0x2290802004801000ULL,0x411000d00100020ULL,0x402800800040080ULL,0xb000401004208ULL,0x2409000100040200ULL,0x1002100004082ULL,
-        0x22878001e24000ULL,0x1090810021004010ULL,0x801030040200012ULL,0x500808008001000ULL,0xa08018014000880ULL,0x8000808004000200ULL,0x201008080010200ULL,0x801020000441091ULL,
-        0x800080204005ULL,0x1040200040100048ULL,0x120200402082ULL,0xd14880480100080ULL,0x12040280080080ULL,0x100040080020080ULL,0x9020010080800200ULL,0x813241200148449ULL,
-        0x491604001800080ULL,0x100401000402001ULL,0x4820010021001040ULL,0x400402202000812ULL,0x209009005000802ULL,0x810800601800400ULL,0x4301083214000150ULL,0x204026458e001401ULL,
-        0x40204000808000ULL,0x8001008040010020ULL,0x8410820820420010ULL,0x1003001000090020ULL,0x804040008008080ULL,0x12000810020004ULL,0x1000100200040208ULL,0x430000a044020001ULL,
-        0x280009023410300ULL,0xe0100040002240ULL,0x200100401700ULL,0x2244100408008080ULL,0x8000400801980ULL,0x2000810040200ULL,0x8010100228810400ULL,0x2000009044210200ULL,
-        0x4080008040102101ULL,0x40002080411d01ULL,0x2005524060000901ULL,0x502001008400422ULL,0x489a000810200402ULL,0x1004400080a13ULL,0x4000011008020084ULL,0x26002114058042ULL,
-};
+U64 rook_hash_[64][4096] = {0};
+U16 rook_hash_feature_[64][4096] = {0};
+
+U16 get_rook_attack_feature(U64 occ, int sq){
+    U64 mask = ROOK_MASK[sq];
+    U64 magic = ROOK_MAGIC[sq];
+    int index = (occ & mask) * magic >> (64 - ROOK_MASK_BITS_COUNT[sq]);
+    U16 feature = rook_hash_feature_[sq][index];
+    return feature;
+}
 U64 get_rook_attack(U64 occ, int sq){
     U64 mask = ROOK_MASK[sq];
     U64 magic = ROOK_MAGIC[sq];
@@ -68,5 +53,26 @@ void init_sq_rook(int sq){
 void init_rook(){
     for(int sq = 0; sq < 64; sq++){
         init_sq_rook(sq);
+    }
+}
+U16 generate_rook_feature(int sq, U64 attack){
+    U64 down_fill = fill_bits(sq);
+    U64 up_fill = (~down_fill) ^ (1ULL << sq);
+    int distance_right = get_distance_right(sq);
+    int distance_down = get_distance_down(sq);
+    U64 row = DISTANCE_DOWN_TO_ROW[distance_down];
+    U64 column = DISTANCE_RIGHT_TO_COLUMN[distance_right];
+    int distance_right_attack = __builtin_popcountl(row & down_fill & attack);
+    int distance_left_attack = __builtin_popcountl(row & up_fill & attack);
+    int distance_up_attack = __builtin_popcountl(column & up_fill & attack);
+    int distance_down_attack = __builtin_popcountl(column & down_fill & attack);
+    U16 distance = distance_right_attack | (distance_left_attack << 3) | (distance_up_attack << 6) | (distance_down_attack << 9);
+    return distance;
+}
+void init_rook_feature(){
+    for(int sq = 0; sq < 64; sq++){
+        for(int i = 0; i < 4096; i++){
+            rook_hash_feature_[sq][i] = generate_rook_feature(sq, rook_hash_[sq][i]);
+        }
     }
 }

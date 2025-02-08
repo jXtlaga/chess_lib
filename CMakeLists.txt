@@ -29,4 +29,8 @@ add_executable(chess_c_lib
         src/castling_en_passant_handling/en_passant_validation.c
         include/chess/search/search_tree.h
         src/search_moves/search_tree.c
+        src/move_handling/mask_feature_generation.c
+        include/chess/mask_feature_generation.h
+        src/attack_generation/magic_hash_bishop_rook.c
+        include/chess/magic_hash_bishop_rook.h
 )

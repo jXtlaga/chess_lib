@@ -34,7 +34,14 @@ U64 flip_board_vertical(U64 x){
             ((x >> 40) & 0x000000000000FF00ULL) |
             (x >> 56));
 }
-
+void flip_vertical_position_half(Pieces_position *pos){
+    pos->pawn = flip_board_vertical(pos->pawn);
+    pos->rook = flip_board_vertical(pos->rook);
+    pos->knight = flip_board_vertical(pos->knight);
+    pos->bishop = flip_board_vertical(pos->bishop);
+    pos->queen = flip_board_vertical(pos->queen);
+    pos->king = flip_board_vertical(pos->king);
+}
 U64 rotate_board_90_clockwise(U64 x){
     return flip_board_vertical(flip_board_diag_A8_H1(x));
 }
