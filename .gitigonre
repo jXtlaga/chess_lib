@@ -1,0 +1,7 @@
+.vscode/
+cmake-build-debug/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+*.cmake
+.idea

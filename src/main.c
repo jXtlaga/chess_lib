@@ -36,7 +36,7 @@ int main() {
     printf("%s", ascii_art);
     init_moves();
     Position position = fen_to_position("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - ");
-//    print_position_with_info(&position);
+    print_position_with_info(&position);
     U64 full = -1;
     full ^= pow2_unsigned_64_exponent(11);
     search_depth(4, position);
