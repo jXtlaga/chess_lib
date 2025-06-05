@@ -23,23 +23,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bbd38e34-b27a-43de-865a-5514740ba4b6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitigonre" beforeDir="false" afterPath="$PROJECT_DIR$/.gitigonre" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/chess_c_lib.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libmy_library.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/test.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/test.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/moves_combinatorics.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/moves_combinatorics.dSYM/Contents/Resources/DWARF/moves_combinatorics" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/moves_combinatorics.dSYM/Contents/Resources/Relocations/aarch64/moves_combinatorics.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/algorithms/bits_alghorithms.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithms/bits_alghorithms.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
-    </list>
+    <list default="true" id="bbd38e34-b27a-43de-865a-5514740ba4b6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -224,7 +208,7 @@
       <workItem from="1738978940618" duration="177000" />
       <workItem from="1738979132287" duration="4094000" />
       <workItem from="1742491907440" duration="31000" />
-      <workItem from="1749086947389" duration="1325000" />
+      <workItem from="1749086947389" duration="1614000" />
     </task>
     <servers />
   </component>
